@@ -1,0 +1,18 @@
+<header>
+<mat-toolbar>
+  <div id="nav-container">
+    <div>
+      <a mat-button><img src="../../../assets/img/logo.png" style="height: 3.6rem" /> </a>
+      <a mat-button [routerLink]="['/', 'search-jobs']">Search Jobs</a>
+      <a mat-button [routerLink]="['/', 'my-jobs']">My Jobs</a>
+    </div>
+    <div>
+      <a mat-button>Welcome, Phat!</a>
+      <a mat-button (click)="logout()">Logout</a>
+    </div>
+
+  </div>
+</mat-toolbar>
+</header>
+
+
