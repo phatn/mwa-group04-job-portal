@@ -4,7 +4,7 @@ import { UserService } from "./user.service";
 import { Router } from "@angular/router";
 import {Observable, Subject, takeUntil} from "rxjs";
 import { Store } from "@ngrx/store";
-import { login } from '../store/action/app.actions'
+import { login } from '../store/action/user.actions'
 
 @Component({
   selector: 'app-login',
