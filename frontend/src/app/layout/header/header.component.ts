@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { Router } from "@angular/router";
 
 @Component({
@@ -6,15 +6,25 @@ import { Router } from "@angular/router";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnChanges {
 
-  constructor(private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private router: Router) {
+
+  }
 
   logout() {
     this.router.navigate(['/', 'login']);
   }
 
   ngOnInit(): void {
+
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.isLoggedIn = localStorage.getItem('TOKEN') ? true : false;
+  }
+
 
 }
