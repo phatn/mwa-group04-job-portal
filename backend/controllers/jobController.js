@@ -35,27 +35,23 @@ module.exports.updateJobById = async function (req, res, next) {
     }
 }
 
-module.exports.updateJobStatusById = async function (req, res, next) {
-    console.log("deleteJobById");
-    try {
-        const { job_id } = req.params;
-        const results = await Job.deleteOne(
-            { _id: job_id });
-        if (results.deletedCount > 0) {
-            res.status(200).json(results);
-        }
-        next({ error: 'update unsuccessful' });
-    } catch (error) {
-        next(error);
-    }
-}
-
 module.exports.createJob = async function (req, res, next) {
     console.log("createJob");
     try {
         const job = req.body;
         const results = await Job.create(job);
         res.json(results);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.createJobs = async function (req, res, next) {
+    console.log("createJobs");
+    try {
+        const jobs = req.body;
+        const results = await Job.insertMany(jobs);
+        res.json({ success: 1 });
     } catch (error) {
         next(error);
     }

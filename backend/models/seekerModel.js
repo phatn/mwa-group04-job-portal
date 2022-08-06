@@ -1,12 +1,21 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const uniqueValidator = require('mongoose-unique-validator');
 
-const schema = new mongoose.Schema({
-    email: String,
-    password: String,
+const SeekerSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: [true, 'Email is required'],
+        unique: true
+    },
+    password: {
+        type: String,
+        required: [true, 'Password is required']
+    },
     fullname: String,
-    resume: String, ///public/src/files/abcd.pdf
-    education: String, //master / bachelor
-    skill_set: [    //[Java, NodeJS, Angular]
+    resume: String,     ///public/src/files/abcd.pdf
+    education: String,  //master / bachelor
+    skill_set: [        //[Java, NodeJS, Angula]
         {
             skill: String
         },
@@ -15,4 +24,15 @@ const schema = new mongoose.Schema({
     status: String //[active, inactive]
 });
 
-module.exports = mongoose.model('Seeker', schema);
+SeekerSchema.pre('save', function (next) {
+    const user = this
+    bcrypt.hash(user.password, 10, (error, hash) => {
+        user.password = hash
+        next()
+    })
+});
+
+SeekerSchema.plugin(uniqueValidator);
+
+module.exports =
+    mongoose.models.Seeker || mongoose.model('Seeker', SeekerSchema);

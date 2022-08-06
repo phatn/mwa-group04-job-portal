@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
-const schema = new mongoose.Schema({
+const JobSchema = new mongoose.Schema({
     title: String,
     description: String,
-    skills: [],
+    skills: [
+        { skill: String }
+    ],
     job_type: String,
     location: {
         address: String,
@@ -11,17 +13,17 @@ const schema = new mongoose.Schema({
         state: String,
         country: String
     },
-    timestamp_created: Number,
+    timestamp_created: { type: Number, default: Date.now() },
     created_by: String,
     employer: {
-        _id: String,
+        _id: mongoose.Types.ObjectId,
         email: String,
         fullname: String,
         organization: String
     },
     applied_by: [
         {
-            _id: String,
+            _id: mongoose.Types.ObjectId,
             email: String,
             fullname: String,
             resume: String,
@@ -35,4 +37,5 @@ const schema = new mongoose.Schema({
     ]
 });
 
-module.exports = mongoose.model('Job', schema);
+module.exports =
+    mongoose.models.Job || mongoose.model('Job', JobSchema);
