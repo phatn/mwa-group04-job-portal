@@ -9,6 +9,8 @@ router.post('/test', jobController.createJobs);
 //get all jobs with queries
 router.get('/', jobController.getAllJobs);
 
+router.get('/search', jobController.search);
+
 //get a job
 router.get('/:job_id', jobController.getJobById);
 

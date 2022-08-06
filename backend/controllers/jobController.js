@@ -56,3 +56,14 @@ module.exports.createJobs = async function (req, res, next) {
         next(error);
     }
 }
+
+module.exports.search = async function (req, res, next) {
+    console.log("search jobs by keyword");
+    try {
+        const { q } = req.query;
+        const results = await Job.find({$text: {$search: q}});
+        res.json(results);
+    } catch (error) {
+        next(error);
+    }
+}
