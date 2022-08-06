@@ -8,6 +8,14 @@ import { LayoutModule } from "./layout/layout.module";
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { JobSeekerModule } from "./job-seeker/job-seeker.module";
+import { MaterialModule } from "./material.module";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { UserService } from "./login/user.service";
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from "./store/reducer/app.reducer";
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from "./store/effect/user.effects";
 
 @NgModule({
   declarations: [
@@ -20,10 +28,16 @@ import { JobSeekerModule } from "./job-seeker/job-seeker.module";
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    JobSeekerModule
-
+    JobSeekerModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    StoreModule.forRoot({ rootReducer: appReducer }),
+    EffectsModule.forRoot([UserEffects])
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
