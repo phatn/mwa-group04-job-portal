@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 
 module.exports.login = async function (req, res, next) {
     const { email, password } = req.body;
-
     let userdb, token;
 
     //validate if Seeker
