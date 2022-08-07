@@ -13,7 +13,8 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-list-ejobs',
   templateUrl: './list-ejobs.component.html',
-  styleUrls: ['./list-ejobs.component.css']
+  //styleUrls: ['./list-ejobs.component.css']
+  styleUrls: ['../ejob.css']
 })
 export class ListEjobsComponent implements OnInit {
 

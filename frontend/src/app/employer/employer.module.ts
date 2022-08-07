@@ -17,7 +17,6 @@ import { EditEjobComponent } from './edit-ejob/edit-ejob.component';
     EditEjobComponent
   ],
   exports: [
-    ListEjobsComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +25,8 @@ import { EditEjobComponent } from './edit-ejob/edit-ejob.component';
     RouterModule.forChild([
       {path: '', component: EDashboardComponent},
       {path: 'jobs/add', component: AddEjobComponent},
-      {path: 'jobs/edit/:job_id', component: EditEjobComponent }
+      {path: 'jobs/edit/:job_id', component: EditEjobComponent },
+      {path: 'jobs/view/:job_id', component: EditEjobComponent }
     ]),
   ]
 })

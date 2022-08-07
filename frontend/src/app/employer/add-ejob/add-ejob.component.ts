@@ -9,7 +9,8 @@ import {globalVars} from "../../../environments/globalVars";
 @Component({
   selector: 'app-add-ejob',
   templateUrl: './add-ejob.component.html',
-  styleUrls: ['./add-ejob.component.css']
+  //styleUrls: ['./add-ejob.component.css']
+  styleUrls: ['../ejob.css']
 })
 export class AddEjobComponent implements OnInit {
   form!: FormGroup;
@@ -32,6 +33,7 @@ export class AddEjobComponent implements OnInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
       country: ['', Validators.required],
+      salary: ['', Validators.required],
       job_type: ['', Validators.required],
       status: ['', Validators.required]
     });
@@ -57,6 +59,7 @@ export class AddEjobComponent implements OnInit {
       state: this.form.value.state,
       country: this.form.value.country
     };
+    job.salary = this.form.value.salary;
     job.job_type = this.job_type_selected;
     job.status  = this.job_status_selected;
 

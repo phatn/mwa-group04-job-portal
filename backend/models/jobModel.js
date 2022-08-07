@@ -11,6 +11,7 @@ const JobSchema = new mongoose.Schema({
         state: String,
         country: String
     },
+    salary: Number,
     timestamp_created: { type: Number, default: Date.now() },
     created_by: String,
     employer: {

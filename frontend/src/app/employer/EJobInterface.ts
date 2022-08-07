@@ -1,3 +1,5 @@
+import {Applicant} from "./ApplicantInterface";
+
 export interface Ejob {
   _id: string,
   title: string,
@@ -10,6 +12,7 @@ export interface Ejob {
     state: string,
     country: string
   },
+  salary: number,
   timestamp_created: number,
   created_by: string,
   employer: {
@@ -18,17 +21,6 @@ export interface Ejob {
     fullname: string,
     organization: string
   },
-  applied_by: [
-    {
-      _id: string,
-      email: string,
-      fullname: string,
-      resume: string,
-      education: string,
-      skills: [{ type: string }],
-      yoe: number,
-      status: string
-    },
-  ],
+  applied_by: [{ type: Applicant }],
   status: string
 }

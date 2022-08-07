@@ -5,10 +5,6 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-edashboard',
   template: `
-    <p>
-      edashboard works!
-    </p>
-
     <button mat-raised-button color="primary" type="button" (click)="postNewJob()">Post new job</button>
 
     <div>
