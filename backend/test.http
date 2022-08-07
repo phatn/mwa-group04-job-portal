@@ -52,11 +52,7 @@ Content-Type: application/json
         "fullname": "Phat Nguyen",
         "resume": "/abc/def/seeker1.pdf",      
         "education": "Master of computer science",  
-        "skill_set": [        
-            {   "skill": "java"        },
-            {   "skill": "nodejs"        },
-            {   "skill": "angular"        }
-        ],
+        "skill_set": ["Java", "Nodejs", "Angular"],
         "yoe": "12",
         "status": "active"
     },
@@ -66,12 +62,7 @@ Content-Type: application/json
         "fullname": "seeker2",
         "resume": "/abc/def/seeker2.pdf",      
         "education": "Master of computer science",  
-        "skill_set": [        
-            {   "skill": "cobol"        },
-            {   "skill": "jcl"        },
-            {   "skill": "nodejs"        },
-            {   "skill": "angular"        }
-        ],
+        "skill_set": ["cobol","jcl", "nodejs", "angular"],
         "yoe": "12",
         "status": "active"
     }
@@ -85,7 +76,7 @@ Content-Type: application/json
     {
         "title": "java developer",
         "description": "senior java developer",
-        "skills": [{"skill": "java"}, {"skill": "spring"}, {"skill": "OOP"}],
+        "skills": ["Java", "Spring", "OOP"],
         "job_type": "full-time",
         "location": {
             "address": "1000 N 4th St",
@@ -107,11 +98,7 @@ Content-Type: application/json
                 "fullname": "seeker1updated",
                 "resume": "/abc/def/seeker1.pdf",
                 "education": "Master of computer science",      
-                "skill_set": [        
-                    {   "skill": "java"        },
-                    {   "skill": "nodejs"        },
-                    {   "skill": "angular"        }
-                ],
+                "skill_set": ["Java", "Nodejs", "Angular"],
                 "yoe": "12",
                 "status": "submited"
             },
@@ -121,12 +108,7 @@ Content-Type: application/json
                 "fullname": "seeker2",
                 "resume": "/abc/def/seeker2.pdf",      
                 "education": "Master of computer science",  
-                "skill_set": [        
-                    {   "skill": "cobol"        },
-                    {   "skill": "jcl"        },
-                    {   "skill": "nodejs"        },
-                    {   "skill": "angular"        }
-                ],
+                "skill_set": ["Cobol", "JCL", "Nodejs", "Angular"],
                 "yoe": "12",
                 "status": "submited"
             }
@@ -135,7 +117,7 @@ Content-Type: application/json
         {
         "title": "cobol developer",
         "description": "senior cobol developer",
-        "skills": [{"skill": "cobol"}, {"skill": "jcl"}, {"skill": "java"}],
+        "skills": ["Cobol", "JCL", "Java"],
         "job_type": "full-time",
         "location": {
             "address": "1001 N 4th St",
@@ -157,11 +139,7 @@ Content-Type: application/json
                 "fullname": "seeker1updated",
                 "resume": "/abc/def/seeker1.pdf",
                 "education": "Master of computer science",      
-                "skill_set": [        
-                    {   "skill": "java"        },
-                    {   "skill": "nodejs"        },
-                    {   "skill": "angular"        }
-                ],
+                "skill_set": ["java", "spring", "OOP"],
                 "yoe": "12",
                 "status": "submited"
             },
@@ -171,12 +149,7 @@ Content-Type: application/json
                 "fullname": "seeker2",
                 "resume": "/abc/def/seeker2.pdf",      
                 "education": "Master of computer science",  
-                "skill_set": [        
-                    {   "skill": "cobol"        },
-                    {   "skill": "jcl"        },
-                    {   "skill": "nodejs"        },
-                    {   "skill": "angular"        }
-                ],
+                "skill_set": ["Cobol", "JCL", "Nodejs", "Angular"],
                 "yoe": "12",
                 "status": "submited"
             }
@@ -237,11 +210,7 @@ Content-Type: application/json
     "fullname": "seeker1",
     "resume": "/abc/def/seeker1.pdf",      
     "education": "Master of computer science",  
-    "skill_set": [        
-        {   "skill": "java"        },
-        {   "skill": "nodejs"        },
-        {   "skill": "angular"        }
-    ],
+    "skill_set": ["Java", "Nodejs", "Angular"],
     "yoe": "12",
     "status": "active"
 }
@@ -256,12 +225,8 @@ Content-Type: application/json
     "fullname": "seeker1updated",
     "resume": "/abc/def/seeker1.pdf",      
     "education": "Master of computer science",  
-    "skill_set": [        
-        {   "skill": "java"        },
-        {   "skill": "nodejs"        },
-        {   "skill": "angular"        }
-    ],
-    "yoe": "12",
+    "skill_set": ["Java", "Nodejs", "Angular"],
+  "yoe": "12",
     "status": "active"
 }
 
@@ -275,7 +240,7 @@ Content-Type: application/json
 {
     "title": "java developer",
     "description": "senior java developer",
-    "skills": [{"skill": "java"}, {"skill": "spring"}, {"skill": "OOP"}],
+    "skills": ["java", "spring", "OOP"],
     "job_type": "full-time",
     "location": {
         "address": "1000 N 4th St",
@@ -297,11 +262,7 @@ Content-Type: application/json
             "fullname": "seeker1updated",
             "resume": "/abc/def/seeker1.pdf",
             "education": "Master of computer science",      
-            "skill_set": [        
-                {   "skill": "java"        },
-                {   "skill": "nodejs"        },
-                {   "skill": "angular"        }
-            ],
+            "skill_set": ["java", "spring", "OOP"],
             "yoe": "12",
             "status": "submited"
         },
@@ -311,12 +272,7 @@ Content-Type: application/json
             "fullname": "seeker2",
             "resume": "/abc/def/seeker2.pdf",      
             "education": "Master of computer science",  
-            "skill_set": [        
-                {   "skill": "cobol"        },
-                {   "skill": "jcl"        },
-                {   "skill": "nodejs"        },
-                {   "skill": "angular"        }
-            ],
+            "skill_set": ["java", "spring", "OOP"],
             "yoe": "12",
             "status": "submited"
         }
@@ -331,7 +287,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJlZGNjZjg2
 {
     "title": "java developer",
     "description": "senior java developer with more than 10 years of experience",
-    "skills": [{"skill": "java"}, {"skill": "spring"}, {"skill": "OOP"}],
+    "skills":["java", "spring", "OOP"],
     "job_type": "full-time",
     "location": {
         "address": "1000 N 4th St",
@@ -353,11 +309,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJlZGNjZjg2
             "fullname": "seeker1updated",
             "resume": "/abc/def/seeker1.pdf",
             "education": "Master of computer science",      
-            "skill_set": [        
-                {   "skill": "java"        },
-                {   "skill": "nodejs"        },
-                {   "skill": "angular"        }
-            ],
+            "skill_set": ["java", "spring", "OOP"],
             "yoe": "12",
             "status": "submited"
         },
@@ -367,12 +319,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJlZGNjZjg2
             "fullname": "seeker2",
             "resume": "/abc/def/seeker2.pdf",      
             "education": "Master of computer science",  
-            "skill_set": [        
-                {   "skill": "cobol"        },
-                {   "skill": "jcl"        },
-                {   "skill": "nodejs"        },
-                {   "skill": "angular"        }
-            ],
+            "skill_set": ["java", "spring", "OOP"],
             "yoe": "12",
             "status": "submited"
         }

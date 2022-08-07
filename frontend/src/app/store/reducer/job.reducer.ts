@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { jobSeekerSearch, jobSeekerSearchResult } from "../action/seeker.actions";
+import {jobApply, jobApplySuccess, jobSeekerSearch, jobSeekerSearchResult} from "../action/seeker.actions";
 import { Job } from "../../job-seeker/search-jobs/job.model";
 
 export const initialState: Array<Job> = [];

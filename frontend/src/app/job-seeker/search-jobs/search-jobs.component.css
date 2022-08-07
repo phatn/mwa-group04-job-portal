@@ -43,6 +43,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  margin-bottom: 5rem;
 }
 
 #job-result {
@@ -64,7 +65,7 @@ p.job-short-description {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 1rem;
   overflow-y: scroll;
-  max-height: 40rem;
+  max-height: 42rem;
 }
 
 .job-heading {
@@ -89,4 +90,10 @@ p.job-short-description {
 .job-box {
   border-bottom: 1px solid #c6c6c6;
   padding: 1rem;
+}
+
+.apply-job-box {
+  position: sticky;
+  top: 0;
+  background-color: #FFF;
 }

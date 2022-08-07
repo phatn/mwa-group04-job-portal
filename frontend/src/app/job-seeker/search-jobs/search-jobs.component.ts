@@ -2,10 +2,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { Observable, Subject} from "rxjs";
-import { jobSeekerSearch } from "../../store/action/seeker.actions";
+import {Observable, Subject, takeUntil} from "rxjs";
+import {jobApply, jobApplySuccess, jobSeekerSearch} from "../../store/action/seeker.actions";
 import { Job } from "./job.model";
-import {map} from "rxjs/operators";
+import { map } from "rxjs/operators";
+import {UserService} from "../../login/user.service";
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-search-jobs',
@@ -19,6 +21,8 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   jobs$: Observable<Array<Job>>;
+
+  jobApplyResult$: Observable<string> = new Observable<string>();
 
   job$: Observable<Job> = new Observable<Job>();
 
@@ -34,16 +38,24 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   }
 
   apply(job_id: string) {
-    console.log(`Applied job: ${job_id}`);
-
+    const { email } = this.userService.decodeToken();
+    this.store.dispatch(jobApply({job_id, email}));
   }
 
   constructor(private formBuilder : FormBuilder,
               private router: Router,
-              private store: Store<{jobReducer: any}>) {
+              private userService: UserService,
+              private _snackBar: MatSnackBar,
+              private store: Store<{jobReducer: any, jobApplyReducer: any}>) {
 
     this.jobs$ = store.select('jobReducer');
+    this.jobApplyResult$ = store.select('jobApplyReducer');
 
+    this.jobApplyResult$.subscribe(response => {
+      if(response) {
+        this.openSnackBar("Job applied, good luck!", "");
+      }
+    })
     this.searchJobForm = this.formBuilder.group({
       keyword: [],
       city: [],
@@ -59,4 +71,14 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
 }

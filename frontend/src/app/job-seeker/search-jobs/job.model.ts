@@ -3,9 +3,7 @@ export interface Job {
   title: string,
   description: string,
   salary: string,
-  skills: [
-    { skill: string }
-  ],
+  skills: Array<string>,
   job_type: string,
   location: {
     address: string,

@@ -26,6 +26,7 @@
     </form>
 
   <div id="search-result">
+
     <div id="job-result">
       <mat-card class="job-card" *ngFor="let job of jobs$ | async" (click)="showDetail(job._id)">
         <mat-card-title-group>
@@ -40,7 +41,7 @@
     </div>
 
     <div id="job-detail" *ngIf="job$ | async as job">
-      <div class="job-box">
+      <div class="job-box apply-job-box">
         <p class="job-heading">{{job.title}}</p>
         <button class="btn-apply-job" mat-raised-button color="primary" (click)="apply(job._id)">Apply Now</button>
       </div>

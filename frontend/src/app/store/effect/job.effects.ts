@@ -4,7 +4,13 @@ import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 
 import { JobSeekerService } from "../../job-seeker/search-jobs/job-seeker.service";
-import { JOB_SEEKER_SEARCH, jobSeekerSearch, jobSeekerSearchResult } from "../action/seeker.actions";
+import {
+  JOB_SEEKER_APPLY,
+  JOB_SEEKER_SEARCH,
+  jobApplySuccess,
+  jobSeekerSearch,
+  jobSeekerSearchResult
+} from "../action/seeker.actions";
 import {Job} from "../../job-seeker/search-jobs/job.model";
 
 @Injectable()
@@ -21,6 +27,20 @@ export class JobEffects {
       )
     )
   );
+
+
+  jobApply$ = createEffect(() =>  this.actions$.pipe(
+      ofType(JOB_SEEKER_APPLY),
+      exhaustMap((action: {job_id:string, email: string}) => this.jobSeekerService.applyJob(action.job_id, action.email)
+        .pipe(
+          map(success => {
+            return jobApplySuccess(success);
+          }),
+          catchError(() => EMPTY))
+      )
+    )
+  );
+
 
 
   constructor(

@@ -5,8 +5,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const jobRouter = require('./routes/jobRouter');
 const userRouter = require('./routes/userRouter');
-const employerRouter = require('./routes/employerRouter');
-
+const seekerRouter = require('./routes/seekerRouter');
+const employerRouter = require('./routes/employerRouter')
 //app
 const app = express();
 mongoose.connect('mongodb://localhost:27017/jobPortal', { useNewUrlParser: true });
@@ -20,6 +20,7 @@ app.use(express.json());
 app.use('/jobs', jobRouter);
 app.use('/users', userRouter);
 app.use('/employers', employerRouter);
+app.use('/seekers', seekerRouter);
 
 app.use((req, res, next) => {
     next(new Error('Route Not Found'));

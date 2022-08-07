@@ -32,4 +32,12 @@ export class JobSeekerService {
     })
     return this.http.get<Array<Job>>(`${environment.apiUrl}/jobs/search?${query}`);
   }
+
+  applyJob(job_id: string, email: string) {
+    console.log(`${environment.apiUrl}/seekers/job/${job_id}`, email)
+    return this.http.patch<{success:string}>(`${environment.apiUrl}/seekers/job/${job_id}`, {
+      job_id,
+      email
+    });
+  }
 }

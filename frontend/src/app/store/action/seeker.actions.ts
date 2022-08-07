@@ -3,7 +3,11 @@ import { Job } from "../../job-seeker/search-jobs/job.model";
 
 export const JOB_SEEKER_SEARCH = 'JOB_SEEKER_SEARCH';
 export const JOB_SEEKER_SEARCH_RESULT = 'JOB_SEEKER_SEARCH_RESULT';
+export const JOB_SEEKER_APPLY = 'JOB_SEEKER_APPLY';
+export const JOB_SEEKER_APPLY_SUCCESS = 'JOB_SEEKER_APPLY_SUCCESS';
 
 // SEEKER ACTIONS
 export const jobSeekerSearch = createAction(JOB_SEEKER_SEARCH, props<{keyword:string, city:string, state:string}>());
 export const jobSeekerSearchResult = createAction(JOB_SEEKER_SEARCH_RESULT, props<{jobs: Array<Job>}>());
+export const jobApply = createAction(JOB_SEEKER_APPLY, props<{job_id: string, email: string}>());
+export const jobApplySuccess = createAction(JOB_SEEKER_APPLY_SUCCESS, props<{success: string}>());

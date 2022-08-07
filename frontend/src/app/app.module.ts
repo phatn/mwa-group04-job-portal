@@ -20,6 +20,7 @@ import { jobReducer } from "./store/reducer/job.reducer";
 import { userReducer } from "./store/reducer/user.reducer";
 import {EmployerModule} from "./employer/employer.module";
 import { AttachTokenInterceptor } from './attach-token.interceptor';
+import { jobApplyReducer } from "./store/reducer/job.apply.reducer";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { AttachTokenInterceptor } from './attach-token.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     JobSeekerModule,
-    StoreModule.forRoot({ userReducer: userReducer, jobReducer: jobReducer }),
+    StoreModule.forRoot({ userReducer: userReducer, jobReducer: jobReducer, jobApplyReducer: jobApplyReducer }),
     EffectsModule.forRoot([UserEffects, JobEffects])
   ],
   providers: [

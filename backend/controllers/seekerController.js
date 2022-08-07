@@ -1,4 +1,5 @@
 const Seeker = require('../models/SeekerModel');
+const Job = require('../models/jobModel');
 
 module.exports.getSeekerById = async function (req, res, next) {
     console.log("getSeekerById");
@@ -43,6 +44,21 @@ module.exports.createSeekers = async function (req, res, next) {
         seekers.forEach(seeker => {
             Seeker.create(seeker);
         });
+        res.json({ success: 1 });
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+module.exports.applyJob = async function (req, res, next) {
+    console.log("Apply Job");
+    try {
+        const {job_id, email} = req.body;
+        const seeker = await Seeker.findOne({email: email});
+        if(seeker) {
+            await Job.findByIdAndUpdate(job_id, {$addToSet: {"applied_by": seeker}})
+        }
         res.json({ success: 1 });
     } catch (error) {
         next(error);

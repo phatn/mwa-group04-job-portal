@@ -94,6 +94,7 @@ module.exports.createJobs = async function (req, res, next) {
 }
 
 module.exports.search = async function (req, res, next) {
+    console.log('enter search')
     try {
         const { keyword, city, state } = req.query;
         let results;
@@ -113,6 +114,7 @@ module.exports.search = async function (req, res, next) {
             console.log('enter 4')
             results = await Job.find({$text: {$search: keyword}});
         }
+        console.log(results)
         res.json(results);
     } catch (error) {
         next(error);

@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class StringsJoinerPipe implements PipeTransform {
 
-  transform(value: Array<{skill:string}>, joiner=', '): string {
+  transform(value: Array<string>, joiner=', '): string {
     let arr:Array<string> = [];
-    value.forEach(item => arr.push(item.skill))
+    value.forEach(item => arr.push(item))
     return arr.join(joiner);
   }
 }
