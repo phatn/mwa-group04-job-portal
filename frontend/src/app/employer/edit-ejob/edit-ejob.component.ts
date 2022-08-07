@@ -74,9 +74,6 @@ export class EditEjobComponent implements OnInit {
         },
       )
 
-
-
-
   }
 
   ngOnInit(): void {
