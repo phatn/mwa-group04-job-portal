@@ -3,9 +3,7 @@ const mongoose = require('mongoose');
 const JobSchema = new mongoose.Schema({
     title: String,
     description: String,
-    skills: [
-        { skill: String }
-    ],
+    skills: [{ type: String }],
     job_type: String,
     location: {
         address: String,
@@ -27,15 +25,13 @@ const JobSchema = new mongoose.Schema({
             email: String,
             fullname: String,
             resume: String,
-            education: String,      //master / bachelor
-            skill_set: [            //[Java, NodeJS, Angula]
-                { skill: String }
-            ],
+            education: String,              //master / bachelor
+            skill_set: [{ type: String }],  //[Java, NodeJS, Angula]
             yoe: Number,
-            status: String          //[submited, viewed, rejected, hired]
+            status: String                  //submited, viewed, rejected, hired
         },
     ],
-    status: String                  //active/ inactive
+    status: String                          //active/ inactive
 });
 
 module.exports =

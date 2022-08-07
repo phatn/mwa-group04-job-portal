@@ -2,9 +2,7 @@ export interface Ejob {
   _id: string,
   title: string,
   description: string,
-  skills: [
-    { skill: string }
-  ],
+  skills: [{ type: string }],
   job_type: string,
   location: {
     address: string,
@@ -27,9 +25,7 @@ export interface Ejob {
       fullname: string,
       resume: string,
       education: string,
-      skill_set: [
-        { skill: string }
-      ],
+      skills: [{ type: string }],
       yoe: number,
       status: string
     },

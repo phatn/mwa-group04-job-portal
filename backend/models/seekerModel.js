@@ -15,11 +15,7 @@ const SeekerSchema = new mongoose.Schema({
     fullname: String,
     resume: String,     ///public/src/files/abcd.pdf
     education: String,  //master / bachelor
-    skill_set: [        //[Java, NodeJS, Angula]
-        {
-            skill: String
-        },
-    ],
+    skill_set: [{type: String}],
     yoe: Number,
     status: String //[active, inactive]
 });

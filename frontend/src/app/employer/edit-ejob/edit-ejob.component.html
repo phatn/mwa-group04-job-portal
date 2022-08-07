@@ -1,6 +1,6 @@
 <div id="container">
   <mat-card>
-    <mat-card-title>Create A Job</mat-card-title>
+    <mat-card-title>Edit Job</mat-card-title>
     <mat-card-content>
       <form [formGroup]="form" autocomplete="off">
 
@@ -72,10 +72,52 @@
 
         <div class="button">
           <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button>
-          <button mat-raised-button color="primary" type="button" (click)="addEJob()">Create</button>
+          <button mat-raised-button color="primary" type="button" (click)="editEJob()">Update</button>
         </div>
 
       </form>
     </mat-card-content>
   </mat-card>
+
+  <!--table mat-table [dataSource]="applicants" class="mat-elevation-z8"-->
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Title Column -->
+    <!--ng-container matColumnDef="fullname">
+      <th mat-header-cell *matHeaderCellDef> Name. </th>
+      <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+    </ng-container-->
+
+    <!-- Description Column -->
+    <!--ng-container matColumnDef="education">
+      <th mat-header-cell *matHeaderCellDef> Education </th>
+      <td mat-cell *matCellDef="let element"> {{element.education}} </td>
+    </ng-container-->
+
+    <!-- Job Type Column -->
+    <!--ng-container matColumnDef="skills">
+      <th mat-header-cell *matHeaderCellDef> Skills </th>
+      <td mat-cell *matCellDef="let element"> {{element.skills}} </td>
+    </ng-container-->
+
+    <!-- Employer Column -->
+    <!--ng-container matColumnDef="yoe">
+      <th mat-header-cell *matHeaderCellDef> YOE </th>
+      <td mat-cell *matCellDef="let element"> {{element.yoe}} </td>
+    </ng-container-->
+
+    <!-- Action Column -->
+    <!--ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" type="button" (click)="viewProfile()">profile</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="applicantColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: applicantColumns;"></tr>
+  </table-->
 </div>
+
