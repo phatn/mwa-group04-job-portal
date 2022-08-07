@@ -9,8 +9,6 @@ module.exports.checkToken = async (req, res, next) => {
     }
 
     const token = req.headers['authorization'];
-    //console.log("token", token);
-    console.log("decode: ", jwt_decode(token));
     jwt.verify(token, 'SECRET', function (err, decoded) {
         console.log(decoded);
         if (err) {
@@ -18,7 +16,6 @@ module.exports.checkToken = async (req, res, next) => {
             return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
         }
         req.user = decoded;
-        console.log("user: ", req.user);
         next();
     })
 }
@@ -27,7 +24,6 @@ module.exports.authEmployer = async (req, res, next) => {
     console.log('authEmployer');
 
     if (!req.user || req.user.role !== 'employer') {
-        console.log()
         return res.status(500).send({ auth: false, message: 'Failed to authenticate employer.' });
     }
     next();

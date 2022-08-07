@@ -11,6 +11,12 @@ const routes: Routes = [
   { path: 'sign-up', component: SignupComponent},
   { path: 'search-jobs', component: SearchJobsComponent},
   { path: 'my-jobs', component: MyJobsComponent},
+  {
+    path: 'employers',
+    loadChildren: () => import('./employer/employer.module')
+      .then(module => module.EmployerModule),
+    //canActivate: [CheckTokenGuard],
+  },
   { path: '**', redirectTo: "login"},
 ];
 

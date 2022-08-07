@@ -3,7 +3,9 @@ const Job = require('../models/JobModel');
 module.exports.getAllJobs = async function (req, res, next) {
     console.log("getAllJobs");
     try {
-        const results = await Job.find();
+        const results = await Job.find()
+            .project({title: 1, description: 1, skills: 1, job_type: 1, location: 1, timestamp_created: 1,
+                created_by: 1, "employer.fullname": 1, "employer.organization": 1});
         res.json(results);
     } catch (error) {
         next(error);
@@ -11,7 +13,39 @@ module.exports.getAllJobs = async function (req, res, next) {
 }
 
 module.exports.getJobById = async function (req, res, next) {
-    console.log("getjobById");
+    console.log("getJobById");
+    try {
+        const { job_id } = req.params;
+        const results = await Job.findById(job_id)
+            .project({title: 1, description: 1, skills: 1, job_type: 1, location: 1, timestamp_created: 1,
+                created_by: 1, "employer.fullname": 1, "employer.organization": 1});
+        res.json(results);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.getEJobs = async function (req, res, next) {
+    console.log("getEJobs");
+    try {
+        if (!req.user || req.user.role !== 'employer') {
+            console.log()
+            return res.status(500).send({ auth: false, message: 'Failed to authenticate employer.' });
+        }
+        console.log(req.user.user_id);
+        const results = await Job.find(
+            { "employer._id": req.user.user_id }
+        );
+
+        console.log(results);
+        res.json(results);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.getEJobById = async function (req, res, next) {
+    console.log("getEJobById");
     try {
         const { job_id } = req.params;
         const results = await Job.findById(job_id);
@@ -21,8 +55,8 @@ module.exports.getJobById = async function (req, res, next) {
     }
 }
 
-module.exports.updateJobById = async function (req, res, next) {
-    console.log("updateJobById");
+module.exports.updateEJobById = async function (req, res, next) {
+    console.log("updateEJobById");
     try {
         const { job_id } = req.params;
         const job = req.body;
@@ -35,8 +69,8 @@ module.exports.updateJobById = async function (req, res, next) {
     }
 }
 
-module.exports.createJob = async function (req, res, next) {
-    console.log("createJob");
+module.exports.createEJob = async function (req, res, next) {
+    console.log("createEJob");
     try {
         const job = req.body;
         const results = await Job.create(job);
@@ -46,6 +80,8 @@ module.exports.createJob = async function (req, res, next) {
     }
 }
 
+
+//For testing purposes
 module.exports.createJobs = async function (req, res, next) {
     console.log("createJobs");
     try {

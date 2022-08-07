@@ -10,18 +10,20 @@ import { SignupComponent } from './signup/signup.component';
 import { JobSeekerModule } from "./job-seeker/job-seeker.module";
 import { MaterialModule } from "./material.module";
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { UserService } from "./login/user.service";
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from "./store/reducer/app.reducer";
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from "./store/effect/user.effects";
+import {EmployerModule} from "./employer/employer.module";
+import { AttachTokenInterceptor } from './attach-token.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,11 +34,13 @@ import { UserEffects } from "./store/effect/user.effects";
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ rootReducer: appReducer }),
-    EffectsModule.forRoot([UserEffects])
+    StoreModule.forRoot({rootReducer: appReducer}),
+    EffectsModule.forRoot([UserEffects]),
+    EmployerModule
   ],
   providers: [
-    UserService
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: AttachTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const jobRouter = require('./routes/jobRouter');
 const userRouter = require('./routes/userRouter');
+const employerRouter = require('./routes/employerRouter');
 
 //app
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 //route
 app.use('/jobs', jobRouter);
 app.use('/users', userRouter);
+app.use('/employers', employerRouter);
 
 app.use((req, res, next) => {
     next(new Error('Route Not Found'));

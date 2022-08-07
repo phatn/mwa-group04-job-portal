@@ -34,7 +34,8 @@ const JobSchema = new mongoose.Schema({
             yoe: Number,
             status: String          //[submited, viewed, rejected, hired]
         },
-    ]
+    ],
+    status: String                  //active/ inactive
 });
 
 module.exports =

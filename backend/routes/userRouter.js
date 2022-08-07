@@ -15,19 +15,6 @@ router.post('/employers/test', employerController.createEmployers);
 router.post('/seekers/test', seekerController.createSeekers);
 
 
-/**************** EMPLOYER ************************** */
-//get employer
-//router.get('/employers/:employer_id', auth.authEmployer, employerController.getEmployerById);
-router.get('/employers/:employer_id', employerController.getEmployerById);
-
-//create new employer
-router.post('/employers', employerController.createEmployer);
-
-//update employer
-//router.patch('/employers/:employer_id', auth.authEmployer, employerController.updateEmployerById);
-router.patch('/employers/:employer_id', employerController.updateEmployerById);
-
-
 /**************** SEEKER ************************** */
 //update seeker
 //router.get('/seekers/:seeker_id', auth.authSeeker, seekerController.getSeekerById);

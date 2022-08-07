@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import  { HttpClient } from "@angular/common/http";
-import { User } from "../model/User";
+
 import { environment } from '../../environments/environment';
+import jwt_decode from 'jwt-decode';
+import {User} from "./UserInterface";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +21,15 @@ export class UserService {
 
   persistToken(token: string) {
     localStorage.setItem("TOKEN", token);
+  }
+
+  decodeToken(): User {
+    let user = {} as User;
+    const token = localStorage.getItem('TOKEN');
+    if (token) {
+      user = jwt_decode(token);
+    }
+
+    return user;
   }
 }

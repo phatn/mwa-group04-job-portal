@@ -93,16 +93,16 @@ Content-Type: application/json
             "state": "IA",
             "country": "USA"
         },
-        "created_by": "62edaa45b56a850c2ece2842",
+        "created_by": "62edccf860029fae36835609",
         "employer": {
-            "_id": "62edaa45b56a850c2ece2842",
-            "email": "nguyencorp@gmail.com",
-            "fullname": "nguyen's corp",
-            "organization": "nguyencorp"
+            "_id": "62edccf860029fae36835609",
+            "email": "thaicorp@gmail.com",
+            "fullname": "thai's corp",
+            "organization": "thaicorp"
         },
         "applied_by": [
             {
-                "_id": "62edad4769c90baece555035",
+                "_id": "62edcd5f0a4020bb57ff0009",
                 "email": "seeker1@gmail.com",
                 "fullname": "seeker1updated",
                 "resume": "/abc/def/seeker1.pdf",
@@ -116,7 +116,7 @@ Content-Type: application/json
                 "status": "submited"
             },
             {
-                "_id": "62edad4769c90baece555039",
+                "_id": "62edcd5f0a4020bb57ff000d",
                 "email": "seeker2@gmail.com",
                 "fullname": "seeker2",
                 "resume": "/abc/def/seeker2.pdf",      
@@ -143,16 +143,16 @@ Content-Type: application/json
             "state": "IA",
             "country": "USA"
         },
-        "created_by": "62edaa45b56a850c2ece2841",
+        "created_by": "62edccf860029fae36835609",
         "employer": {
-            "_id": "62edaa45b56a850c2ece2841",
+            "_id": "62edccf860029fae36835609",
             "email": "thaicorp@gmail.com",
             "fullname": "thai's corp",
             "organization": "thaicorp"
         },
         "applied_by": [
             {
-                "_id": "62edad4769c90baece555035",
+                "_id": "62edcd5f0a4020bb57ff0009",
                 "email": "seeker1@gmail.com",
                 "fullname": "seeker1updated",
                 "resume": "/abc/def/seeker1.pdf",
@@ -166,7 +166,7 @@ Content-Type: application/json
                 "status": "submited"
             },
             {
-                "_id": "62edad4769c90baece555039",
+                "_id": "62edcd5f0a4020bb57ff000d",
                 "email": "seeker2@gmail.com",
                 "fullname": "seeker2",
                 "resume": "/abc/def/seeker2.pdf",      
