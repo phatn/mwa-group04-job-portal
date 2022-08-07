@@ -1,0 +1,80 @@
+<div id="container">
+  <mat-card>
+    <mat-card-title>Create A Job</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" autocomplete="off">
+
+        <p>
+          <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input type="text" matInput placeholder="" formControlName="title">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="" rows="10" formControlName="description"></textarea>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Skills</mat-label>
+            <input type="text" matInput placeholder="" formControlName="skills">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input type="text" matInput placeholder="" formControlName="city">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>State</mat-label>
+            <input type="text" matInput placeholder="" formControlName="state">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <input type="text" matInput placeholder="" formControlName="country">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Job Type</mat-label>
+            <mat-select formControlName="job_type">
+              <mat-option *ngFor="let job_type of jobTypes" [value]="job_type.value">
+                {{job_type.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option *ngFor="let status of jobStatuses" [value]="status.value">
+                {{status.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+
+
+        <div class="button">
+          <button mat-raised-button color="primary" type="button" (click)="cancelAdd()">Cancel</button>
+          <button mat-raised-button color="primary" type="button" (click)="addEJob()">Create</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
