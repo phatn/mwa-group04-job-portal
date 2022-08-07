@@ -92,3 +92,29 @@ module.exports.createJobs = async function (req, res, next) {
         next(error);
     }
 }
+
+module.exports.search = async function (req, res, next) {
+    try {
+        const { keyword, city, state } = req.query;
+        let results;
+        if(city && state) {
+            console.log('enter 1')
+            results = await Job.find({
+                $or: [{"location.city": city}, {"location.state": state}],
+                $text: {$search: keyword}
+            });
+        } else if(city) {
+            console.log('enter 2')
+            results = await Job.find({"location.city": city , $text: {$search: keyword}});
+        } else if(state) {
+            console.log('enter 3')
+            results = await Job.find({"location.state": state , $text: {$search: keyword}});
+        } else {
+            console.log('enter 4')
+            results = await Job.find({$text: {$search: keyword}});
+        }
+        res.json(results);
+    } catch (error) {
+        next(error);
+    }
+}

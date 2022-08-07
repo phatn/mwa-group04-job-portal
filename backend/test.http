@@ -47,9 +47,9 @@ Content-Type: application/json
 
 [
     {
-        "email": "seeker1@gmail.com",
-        "password": "seeker1",
-        "fullname": "seeker1",
+        "email": "phat@gmail.com",
+        "password": "123",
+        "fullname": "Phat Nguyen",
         "resume": "/abc/def/seeker1.pdf",      
         "education": "Master of computer science",  
         "skill_set": [        

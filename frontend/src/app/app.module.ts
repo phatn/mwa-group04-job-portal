@@ -13,9 +13,11 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { UserService } from "./login/user.service";
 import { StoreModule } from '@ngrx/store';
-import { appReducer } from "./store/reducer/app.reducer";
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from "./store/effect/user.effects";
+import { JobEffects } from "./store/effect/job.effects";
+import { jobReducer } from "./store/reducer/job.reducer";
+import { userReducer } from "./store/reducer/user.reducer";
 import {EmployerModule} from "./employer/employer.module";
 import { AttachTokenInterceptor } from './attach-token.interceptor';
 
@@ -23,7 +25,7 @@ import { AttachTokenInterceptor } from './attach-token.interceptor';
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +36,9 @@ import { AttachTokenInterceptor } from './attach-token.interceptor';
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({rootReducer: appReducer}),
-    EffectsModule.forRoot([UserEffects]),
-    EmployerModule
+    JobSeekerModule,
+    StoreModule.forRoot({ userReducer: userReducer, jobReducer: jobReducer }),
+    EffectsModule.forRoot([UserEffects, JobEffects])
   ],
   providers: [
     UserService,

@@ -14,9 +14,8 @@ export class UserService {
     console.log(`${environment.apiUrl}`)
   }
 
-  login(email: string, password: string, role: string) {
-    console.log(email, password, role);
-    return this.http.post<{token: string}>(`${environment.apiUrl}/users/login`, { email, password, role});
+  login(email: string, password: string) {
+    return this.http.post<{token:string}>(`${environment.apiUrl}/users/login`, { email, password});
   }
 
   persistToken(token: string) {

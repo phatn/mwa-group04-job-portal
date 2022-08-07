@@ -6,17 +6,6 @@
       <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
         <p>
           <mat-form-field>
-            <mat-label>Login As</mat-label>
-            <mat-select formControlName="role">
-              <mat-option *ngFor="let role of roles" [value]="role.value">
-                {{role.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </p>
-
-        <p>
-          <mat-form-field>
             <input type="text" matInput placeholder="Email" formControlName="email" formControlName="email">
           </mat-form-field>
         </p>

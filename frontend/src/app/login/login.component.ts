@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UserService } from "./user.service";
 import { Router } from "@angular/router";
-import {Observable, Subject, takeUntil} from "rxjs";
+import { Observable, Subject, takeUntil} from "rxjs";
 import { Store } from "@ngrx/store";
 import { login } from '../store/action/user.actions'
 
@@ -13,11 +13,6 @@ import { login } from '../store/action/user.actions'
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  roles = [
-    {value: 'JOB_SEEKER', viewValue: 'Job Seeker'},
-    {value: 'EMPLOYER', viewValue: 'Employer'}
-  ]
-
   loginForm!: FormGroup;
 
   token$!: Observable<any>;
@@ -27,13 +22,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private formBuilder : FormBuilder,
               private userService: UserService,
               private router: Router,
-              private store: Store<{rootReducer: any}>
+              private store: Store<{userReducer: any}>
               ) {
 
-    store.select('rootReducer')
+    store.select('userReducer')
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         response => {
+          console.log(`Response: ${JSON.stringify(response)}`);
           const {token} = response;
           if(token) {
             localStorage.setItem('TOKEN', token);
@@ -53,12 +49,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
-    }
+  }
 
 
   login(): void {
-    const { email, password, role } = this.loginForm.value;
-    this.store.dispatch(login({email, password, role}));
+    const { email, password } = this.loginForm.value;
+    this.store.dispatch(login({email, password}));
   }
 
   ngOnInit(): void {

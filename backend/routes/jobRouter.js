@@ -9,6 +9,9 @@ const jobController = require('../controllers/jobController');
 //host:/jobs                get all jobs with queries
 router.get('/', jobController.getAllJobs);
 
+router.get('/search', jobController.search);
+
+//get a job
 //host:/jobs/:job_id        get all jobs with queries
 router.get('/:job_id', jobController.getJobById);
 
