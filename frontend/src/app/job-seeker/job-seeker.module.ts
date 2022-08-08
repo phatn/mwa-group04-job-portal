@@ -5,6 +5,8 @@ import { MyJobsComponent } from './my-jobs/my-jobs.component';
 import { MaterialModule } from "../material.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { StringsJoinerPipe } from "../pipe/strings-joiner.pipe";
+import {AppModule} from "../app.module";
+import {StatusExtractorPipe} from "../pipe/status-extractor.pipe";
 
 
 
@@ -12,13 +14,14 @@ import { StringsJoinerPipe } from "../pipe/strings-joiner.pipe";
   declarations: [
     SearchJobsComponent,
     MyJobsComponent,
-    StringsJoinerPipe
+    StringsJoinerPipe,
+    StatusExtractorPipe
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        ReactiveFormsModule
+    ],
   exports: [
     SearchJobsComponent,
     MyJobsComponent,
