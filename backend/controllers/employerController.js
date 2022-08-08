@@ -1,5 +1,7 @@
 const Employer = require('../models/EmployerModel');
+const Seeker = require('../models/seekerModel');
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
 
 
 module.exports.getEmployerById = async function (req, res, next) {
@@ -48,6 +50,33 @@ module.exports.createEmployers = async function (req, res, next) {
             Employer.create(employer);
         });
         res.json({ success: 1 });
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.signup = async function (req, res, next) {
+    try {
+        const {role, email, password, fullname, education, skills, yoe, organization, address, city, state, country} = req.body;
+
+        if(role === 'seeker') {
+            const skill_set = skills.split(',');
+            const seekerObj = {email, password, fullname, education, skill_set, yoe};
+            const seeker = await Seeker.create(seekerObj);
+            const obj = { user_id: seeker._id, fullname: seeker.fullname, email: seeker.email, role: "seeker" };
+            const token = jwt.sign(obj, 'SECRET');
+            return res.status(200).json({ token: token });
+        } else {
+            const location = {
+                address,
+                city,
+                state,
+                country
+            }
+            const employer = await Employer.create({email, password, fullname, organization, location});
+            const token = jwt.sign({ user_id: employer._id, fullname: employer.fullname, email: employer.email, role: "employeer" }, 'SECRET');
+            return res.status(200).json({ token: token });
+        }
     } catch (error) {
         next(error);
     }

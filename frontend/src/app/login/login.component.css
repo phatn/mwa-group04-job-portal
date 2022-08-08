@@ -9,7 +9,10 @@
   flex-direction: column;
 
 }
-
+.login-heading {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 #logo {
   margin: 3rem auto;
   display: block;
@@ -35,5 +38,6 @@ mat-card-content {
 
 .button {
   display: flex;
-  justify-content: flex-end;
+
+  justify-content: space-between;
 }

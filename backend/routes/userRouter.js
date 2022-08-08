@@ -11,4 +11,6 @@ router.post('/login', loginController.login);
 
 router.post('/employers/test', employerController.createEmployers);
 
+router.post('/signup', employerController.signup);
+
 module.exports = router;

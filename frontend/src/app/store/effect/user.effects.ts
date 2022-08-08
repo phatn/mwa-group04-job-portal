@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 import { UserService } from "../../login/user.service";
-import { LOGIN, loginSuccess } from "../action/user.actions";
+import {LOGIN, loginSuccess, SIGNUP, signupSuccess} from "../action/user.actions";
 
 @Injectable()
 export class UserEffects {
@@ -14,6 +14,21 @@ export class UserEffects {
         .pipe(
           map(token => {
             return loginSuccess({token});
+          }),
+          catchError(() => EMPTY))
+      )
+    )
+  );
+
+  userSignup$ = createEffect(() =>  this.actions$.pipe(
+      ofType(SIGNUP),
+      exhaustMap((action: {role:string, email:string, password:string, fullname:string, education:string, skills:string,
+        yoe:string, organization:string, address:string, city:string, state:string, country:string}) =>
+        this.userService.signup(action.role, action.email,action.password, action.fullname, action.education, action.skills,
+          action.yoe, action.organization, action.address, action.city, action.state, action.country)
+        .pipe(
+          map(token => {
+            return signupSuccess({token});
           }),
           catchError(() => EMPTY))
       )

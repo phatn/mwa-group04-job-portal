@@ -18,6 +18,12 @@ export class UserService {
     return this.http.post<{token:string}>(`${environment.apiUrl}/users/login`, { email, password});
   }
 
+  signup(role:string, email:string, password:string, fullname:string, education:string, skills:string,
+           yeo:string, organization:string, address:string, city:string, state:string, country:string) {
+    return this.http.post<{token:string}>(`${environment.apiUrl}/users/signup`,
+      { role, email, password, fullname, education, skills, yeo, organization, address, city, state, country});
+  }
+
   persistToken(token: string) {
     localStorage.setItem("TOKEN", token);
   }
