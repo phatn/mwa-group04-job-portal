@@ -11,8 +11,13 @@ const routes: Routes = [
   { path: '', redirectTo: "login", pathMatch: "full"},
   { path: 'login', component: LoginComponent},
   { path: 'sign-up', component: SignupComponent},
-  { path: 'search-jobs', component: SearchJobsComponent, canActivate: [CheckSeekerGuard]},
-  { path: 'my-jobs', component: MyJobsComponent, canActivate: [CheckSeekerGuard]},
+  {
+    path: 'seekers',
+    loadChildren: () =>
+      import('./job-seeker/job-seeker.module')
+        .then(module => module.JobSeekerModule),
+    canActivate: [CheckSeekerGuard],
+  },
   {
     path: 'employers',
     loadChildren: () =>
