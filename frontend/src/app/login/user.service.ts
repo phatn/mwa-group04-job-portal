@@ -28,6 +28,10 @@ export class UserService {
     localStorage.setItem("TOKEN", token);
   }
 
+  clearToken() {
+    localStorage.removeItem('TOKEN');
+  }
+
   decodeToken(): User {
     let user = {} as User;
     const token = localStorage.getItem('TOKEN');
