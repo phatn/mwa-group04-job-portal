@@ -38,7 +38,7 @@
           <p class="job-short-description">{{job.description}}</p>
         </mat-card-content>
       </mat-card>
-      <mat-paginator [length]="(jobs$ | async)?.total"
+      <mat-paginator *ngIf="showPaginator" [length]="(jobs$ | async)?.total"
                      [pageSize]="5"
                      [pageSizeOptions]="[5, 10, 25, 100]"
                      aria-label="Select page"

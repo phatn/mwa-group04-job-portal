@@ -27,15 +27,17 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   job$: Observable<Job> = new Observable<Job>();
 
+  showPaginator:boolean = false;
+
   search() {
     const { keyword, city, state } = this.searchJobForm.value;
     const page = "0";
     this.store.dispatch(jobSeekerSearch({keyword, city, state, page}));
+    this.showPaginator = true;
   }
 
   showDetail(job_id: string) {
     this.job$ = this.jobs$.pipe(
-      //map((jobs: any[]) => jobs.find((job: { _id: string; }) => job._id == job_id))
       map((jobs: {data: any[], total:number}) => jobs.data.find((job: { _id: string; }) => job._id == job_id))
     )
   }

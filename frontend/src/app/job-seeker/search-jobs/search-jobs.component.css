@@ -48,6 +48,8 @@
 
 #job-result {
   width: 30%;
+  overflow-y: scroll;
+  max-height: 50rem;
 }
 
 p.job-short-description {
