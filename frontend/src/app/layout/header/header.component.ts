@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnChanges {
         const {role, fullname} = this.userService.decodeToken();
         this.isSeeker = (role === 'seeker');
         this.fullname = fullname;
-        if (event.url === '/login') {
+        if (event.url === '/login' || event.url === '/sign-up') {
           this.isLoggedIn = false;
         } else {
           this.isLoggedIn = true;
