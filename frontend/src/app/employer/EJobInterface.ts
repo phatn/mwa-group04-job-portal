@@ -12,7 +12,7 @@ export interface Ejob {
     state: string,
     country: string
   },
-  salary: number,
+  salary: string,
   timestamp_created: number,
   created_by: string,
   employer: {
