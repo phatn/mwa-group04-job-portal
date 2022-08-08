@@ -16,7 +16,6 @@ export class AttachTokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     const token = localStorage.getItem('TOKEN');
-    console.log("intercept ", token);
 
     if (!token) {
       return next.handle(request);
@@ -26,7 +25,6 @@ export class AttachTokenInterceptor implements HttpInterceptor {
         'Content-Type': 'application/json'
       });
 
-      console.log("headers", headers);
       const clone = request.clone({ headers });
       return next.handle(clone);
     }

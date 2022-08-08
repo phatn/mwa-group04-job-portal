@@ -48,6 +48,13 @@
 
         <p>
           <mat-form-field>
+            <mat-label>Salary</mat-label>
+            <input type="text" matInput placeholder="" formControlName="salary">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
             <mat-label>Job Type</mat-label>
             <mat-select formControlName="job_type" [(value)]="job_type_selected" required>
               <mat-option *ngFor="let job_type of jobTypes"
@@ -72,7 +79,7 @@
 
         <div class="button">
           <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button>
-          <button mat-raised-button color="primary" type="button" (click)="addEJob()">Create</button>
+          <button mat-raised-button color="primary" type="button" (click)="addEJob()" [disabled]="!form.valid">Create</button>
         </div>
 
       </form>

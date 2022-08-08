@@ -34,7 +34,12 @@ export class LoginComponent implements OnInit, OnDestroy {
           if(token) {
             localStorage.setItem('TOKEN', token);
             //router.navigate(['/', 'search-jobs'])
-            router.navigate(['/', 'employers'])
+            const user = this.userService.decodeToken();
+            if(user.role === 'employer') {
+              router.navigate(['/', 'employers']);
+            }else {
+              router.navigate(['/', 'search-jobs']);
+            }
           }
 
         }

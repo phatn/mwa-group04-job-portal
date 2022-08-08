@@ -5,11 +5,13 @@ import {Ejob} from "../EJobInterface";
 import {Router} from "@angular/router";
 import {UserService} from "../../login/user.service";
 import {globalVars} from "../../../environments/globalVars";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-ejob',
   templateUrl: './add-ejob.component.html',
-  styleUrls: ['./add-ejob.component.css']
+  //styleUrls: ['./add-ejob.component.css']
+  styleUrls: ['../ejob.css']
 })
 export class AddEjobComponent implements OnInit {
   form!: FormGroup;
@@ -22,9 +24,14 @@ export class AddEjobComponent implements OnInit {
     private formBuilder : FormBuilder,
     private ejobService: EjobsService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar,
   ) {
 
+    this.initFormValue();
+  }
+
+  initFormValue(){
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -32,11 +39,10 @@ export class AddEjobComponent implements OnInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
       country: ['', Validators.required],
+      salary: ['', Validators.required],
       job_type: ['', Validators.required],
       status: ['', Validators.required]
     });
-
-
   }
 
   ngOnInit(): void {
@@ -57,6 +63,7 @@ export class AddEjobComponent implements OnInit {
       state: this.form.value.state,
       country: this.form.value.country
     };
+    job.salary = this.form.value.salary;
     job.job_type = this.job_type_selected;
     job.status  = this.job_status_selected;
 
@@ -71,9 +78,18 @@ export class AddEjobComponent implements OnInit {
 
     this.ejobService.addJob(job).subscribe(
       (reponse) =>{
-        this.router.navigate(['', 'employers']);
+        //this.router.navigate(['', 'employers']);
+        this.openSnackBar("Job created successfully", "");
+        this.initFormValue();
       },
     );
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: "left",
+      verticalPosition: "top",
+    });
+  }
 }

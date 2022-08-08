@@ -4,6 +4,7 @@ import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { SearchJobsComponent } from "./job-seeker/search-jobs/search-jobs.component";
 import { MyJobsComponent } from "./job-seeker/my-jobs/my-jobs.component";
+import {CheckEmployerGuard} from "./check-employer-guard";
 
 const routes: Routes = [
   { path: '', redirectTo: "login", pathMatch: "full"},
@@ -13,9 +14,10 @@ const routes: Routes = [
   { path: 'my-jobs', component: MyJobsComponent},
   {
     path: 'employers',
-    loadChildren: () => import('./employer/employer.module')
+    loadChildren: () =>
+      import('./employer/employer.module')
       .then(module => module.EmployerModule),
-    //canActivate: [CheckTokenGuard],
+    canActivate: [CheckEmployerGuard],
   },
   { path: '**', redirectTo: "login"},
 ];

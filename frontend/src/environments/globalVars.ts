@@ -11,7 +11,13 @@ export const globalVars = {
   jobStatuses : [
     {value: 'Active'},
     {value: 'Inactive'}
-  ]
+  ],
+
+  applicationStatuses : [
+    {value: 'Viewed by employed'},
+    {value: 'Hired'},
+    {value: 'Rejected'},
+  ],
 };
 
 /*

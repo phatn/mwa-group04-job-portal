@@ -1,9 +1,10 @@
 :host {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
-#container {
+#container{
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -11,11 +12,12 @@
 
 .mat-card{
   margin-top: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 mat-form-field {
   width: 100%;
-  min-width: 50rem;
 }
 
 mat-card-title,
@@ -23,6 +25,7 @@ mat-card-content {
   display: flex;
   justify-content: center;
   width: 100%;
+  flex-direction: column;
 }
 
 .error {
@@ -40,3 +43,29 @@ mat-card-content {
 button{
   margin-left: 10px;
 }
+
+table {
+  width: 100%;
+}
+
+.demo-table {
+  width: 100%;
+}
+
+.mat-row .mat-cell {
+  /*
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+   */
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: aliceblue;
+}
+
+/*
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+ */
