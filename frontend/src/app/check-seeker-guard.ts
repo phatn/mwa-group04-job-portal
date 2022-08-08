@@ -6,7 +6,7 @@ import {UserService} from "./login/user.service";
 @Injectable({
   providedIn: 'root'
 })
-export class CheckEmployerGuard implements CanActivate {
+export class CheckSeekerGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {
   }
 
@@ -15,7 +15,7 @@ export class CheckEmployerGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const user = this.userService.decodeToken();
     const { role } = user;
-    if(role && role === 'employer') {
+    if(role && role === 'seeker') {
       return true;
     } else {
       this.router.navigate(['/', 'login']);
