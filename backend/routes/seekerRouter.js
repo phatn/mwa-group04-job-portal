@@ -17,4 +17,6 @@ router.patch('/:seeker_id/', seekerController.updateSeekerById);
 
 router.patch('/job/:job_id', seekerController.applyJob);
 
+router.get('/my-job/:email', seekerController.getMyJobs);
+
 module.exports = router;

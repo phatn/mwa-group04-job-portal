@@ -64,3 +64,14 @@ module.exports.applyJob = async function (req, res, next) {
         next(error);
     }
 }
+
+
+module.exports.getMyJobs = async function (req, res, next) {
+    try {
+        const {email} = req.body;
+        const results = await Job.find({"applied_by.email": email});
+        res.json(results);
+    } catch (error) {
+        next(error);
+    }
+}

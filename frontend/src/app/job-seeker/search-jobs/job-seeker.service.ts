@@ -34,10 +34,13 @@ export class JobSeekerService {
   }
 
   applyJob(job_id: string, email: string) {
-    console.log(`${environment.apiUrl}/seekers/job/${job_id}`, email)
     return this.http.patch<{success:string}>(`${environment.apiUrl}/seekers/job/${job_id}`, {
       job_id,
       email
     });
+  }
+
+  getMyJobs(email:string) {
+    return this.http.get<Array<Job>>(`${environment.apiUrl}/seekers/my-job/${email}`);
   }
 }

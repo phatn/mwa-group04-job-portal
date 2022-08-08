@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {JobSeekerService} from "../search-jobs/job-seeker.service";
+import {Observable} from "rxjs";
+import {Job} from "../search-jobs/job.model";
+import {Store} from "@ngrx/store";
+import {jobSeekerMyJob} from "../../store/action/seeker.actions";
+import {UserService} from "../../login/user.service";
+
 
 @Component({
   selector: 'app-my-jobs',
@@ -7,9 +14,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyJobsComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['SNo.', 'Job Title', 'Location', 'Status'];
+  jobs$: Observable<Array<Job>>;
+  constructor(private jobSeekerService: JobSeekerService,
+              private userService: UserService,
+              private store: Store<{jobReducer: any, jobApplyReducer: any}>) {
 
-  ngOnInit(): void {
+    this.jobs$ = store.select('jobReducer');
   }
 
+  ngOnInit(): void {
+    const {email} = this.userService.decodeToken();
+    this.store.dispatch(jobSeekerMyJob({email}));
+  }
 }

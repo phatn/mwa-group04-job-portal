@@ -5,9 +5,9 @@ import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 
 import { JobSeekerService } from "../../job-seeker/search-jobs/job-seeker.service";
 import {
-  JOB_SEEKER_APPLY,
+  JOB_SEEKER_APPLY, JOB_SEEKER_MY_JOB,
   JOB_SEEKER_SEARCH,
-  jobApplySuccess,
+  jobApplySuccess, jobSeekerMyJobResult,
   jobSeekerSearch,
   jobSeekerSearchResult
 } from "../action/seeker.actions";
@@ -28,6 +28,17 @@ export class JobEffects {
     )
   );
 
+  myJobs$ = createEffect(() =>  this.actions$.pipe(
+      ofType(JOB_SEEKER_MY_JOB),
+      exhaustMap((action: {email: string}) => this.jobSeekerService.getMyJobs(action.email)
+        .pipe(
+          map(jobs => {
+            return jobSeekerMyJobResult({jobs});
+          }),
+          catchError(() => EMPTY))
+      )
+    )
+  );
 
   jobApply$ = createEffect(() =>  this.actions$.pipe(
       ofType(JOB_SEEKER_APPLY),

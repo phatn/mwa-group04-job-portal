@@ -51,7 +51,8 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
     this.jobs$ = store.select('jobReducer');
     this.jobApplyResult$ = store.select('jobApplyReducer');
 
-    this.jobApplyResult$.subscribe(response => {
+    this.jobApplyResult$.pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
       if(response) {
         this.openSnackBar("Job applied, good luck!", "");
       }

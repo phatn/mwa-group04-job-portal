@@ -21,30 +21,32 @@ import { userReducer } from "./store/reducer/user.reducer";
 import {EmployerModule} from "./employer/employer.module";
 import { AttachTokenInterceptor } from './attach-token.interceptor';
 import { jobApplyReducer } from "./store/reducer/job.apply.reducer";
+import { StatusExtractorPipe } from './pipe/status-extractor.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    SignupComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    JobSeekerModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    JobSeekerModule,
-    StoreModule.forRoot({ userReducer: userReducer, jobReducer: jobReducer, jobApplyReducer: jobApplyReducer }),
-    EffectsModule.forRoot([UserEffects, JobEffects])
-  ],
-  providers: [
-    UserService,
-    { provide: HTTP_INTERCEPTORS, useClass: AttachTokenInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        SignupComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        JobSeekerModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        StoreModule.forRoot({userReducer: userReducer, jobReducer: jobReducer, jobApplyReducer: jobApplyReducer}),
+        EffectsModule.forRoot([UserEffects, JobEffects])
+    ],
+    providers: [
+        UserService,
+        {provide: HTTP_INTERCEPTORS, useClass: AttachTokenInterceptor, multi: true}
+    ],
+    exports: [
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
