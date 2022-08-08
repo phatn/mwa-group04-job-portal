@@ -28,7 +28,7 @@
   <div id="search-result">
 
     <div id="job-result">
-      <mat-card class="job-card" *ngFor="let job of jobs$ | async" (click)="showDetail(job._id)">
+      <mat-card class="job-card" *ngFor="let job of (jobs$ | async)?.data" (click)="showDetail(job._id)">
         <mat-card-title-group>
           <mat-card-title>{{job.title}}</mat-card-title>
           <mat-card-subtitle>{{job.job_type}}</mat-card-subtitle>
@@ -38,6 +38,12 @@
           <p class="job-short-description">{{job.description}}</p>
         </mat-card-content>
       </mat-card>
+      <mat-paginator [length]="(jobs$ | async)?.total"
+                     [pageSize]="5"
+                     [pageSizeOptions]="[5, 10, 25, 100]"
+                     aria-label="Select page"
+                      (page)="onPageChange($event)">
+      </mat-paginator>
     </div>
 
     <div id="job-detail" *ngIf="job$ | async as job">

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const JobSchema = new mongoose.Schema({
     title: String,
@@ -33,6 +34,8 @@ const JobSchema = new mongoose.Schema({
     ],
     status: String                          //active/ inactive
 });
+
+JobSchema.plugin(mongoosePaginate);
 
 module.exports =
     mongoose.models.Job || mongoose.model('Job', JobSchema);

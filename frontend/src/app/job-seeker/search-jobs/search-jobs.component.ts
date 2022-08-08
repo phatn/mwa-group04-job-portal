@@ -8,6 +8,7 @@ import { Job } from "./job.model";
 import { map } from "rxjs/operators";
 import {UserService} from "../../login/user.service";
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-search-jobs',
@@ -20,7 +21,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  jobs$: Observable<Array<Job>>;
+  jobs$: Observable<{data: Array<Job>, total:number}>;
 
   jobApplyResult$: Observable<string> = new Observable<string>();
 
@@ -28,12 +29,14 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   search() {
     const { keyword, city, state } = this.searchJobForm.value;
-    this.store.dispatch(jobSeekerSearch({keyword, city, state}));
+    const page = "0";
+    this.store.dispatch(jobSeekerSearch({keyword, city, state, page}));
   }
 
   showDetail(job_id: string) {
     this.job$ = this.jobs$.pipe(
-      map((jobs: any[]) => jobs.find((job: { _id: string; }) => job._id == job_id))
+      //map((jobs: any[]) => jobs.find((job: { _id: string; }) => job._id == job_id))
+      map((jobs: {data: any[], total:number}) => jobs.data.find((job: { _id: string; }) => job._id == job_id))
     )
   }
 
@@ -47,6 +50,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
               private userService: UserService,
               private _snackBar: MatSnackBar,
               private store: Store<{jobReducer: any, jobApplyReducer: any}>) {
+
 
     this.jobs$ = store.select('jobReducer');
     this.jobApplyResult$ = store.select('jobApplyReducer');
@@ -62,6 +66,13 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
       city: [],
       state: []
     });
+  }
+
+  onPageChange($event:PageEvent) {
+    console.log(`Page: ${JSON.stringify($event)}`);
+    const { keyword, city, state } = this.searchJobForm.value;
+    const page = $event.pageIndex.toString();
+    this.store.dispatch(jobSeekerSearch({keyword, city, state, page}));
   }
 
   ngOnDestroy(): void {

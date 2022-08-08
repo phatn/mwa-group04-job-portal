@@ -18,10 +18,11 @@ export class JobEffects {
 
   jobSearch$ = createEffect(() =>  this.actions$.pipe(
       ofType(JOB_SEEKER_SEARCH),
-      exhaustMap((action: {keyword: string, city: string, state: string}) => this.jobSeekerService.searchJobs(action.keyword, action.city, action.state)
+      exhaustMap((action: {keyword: string, city: string, state: string, page:number}) =>
+        this.jobSeekerService.searchJobs(action.keyword, action.city, action.state, action.page)
         .pipe(
-          map(jobs => {
-            return jobSeekerSearchResult({jobs});
+          map(response => {
+            return jobSeekerSearchResult({response});
           }),
           catchError(() => EMPTY))
       )
@@ -32,8 +33,8 @@ export class JobEffects {
       ofType(JOB_SEEKER_MY_JOB),
       exhaustMap((action: {email: string}) => this.jobSeekerService.getMyJobs(action.email)
         .pipe(
-          map(jobs => {
-            return jobSeekerMyJobResult({jobs});
+          map(response => {
+            return jobSeekerMyJobResult({response});
           }),
           catchError(() => EMPTY))
       )

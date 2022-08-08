@@ -8,12 +8,12 @@ import {
 } from "../action/seeker.actions";
 import { Job } from "../../job-seeker/search-jobs/job.model";
 
-export const initialState: Array<Job> = [];
+export const initialState:{data: Array<Job>, total:number} =  {data: [], total: 0};
 
 export const jobReducer = createReducer(
   initialState,
   on(jobSeekerSearch, state => state),
-  on(jobSeekerSearchResult, (state, {jobs}) => jobs),
+  on(jobSeekerSearchResult, (state, {response}) => response),
   on(jobSeekerMyJob, state => state),
-  on(jobSeekerMyJobResult, (state, {jobs}) => jobs)
+  on(jobSeekerMyJobResult, (state, {response}) => response)
 );
