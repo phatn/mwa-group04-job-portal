@@ -7,6 +7,7 @@ import {Ejob} from "../EJobInterface";
 import { mergeMap } from 'rxjs';
 import {globalVars} from "../../../environments/globalVars";
 import {Applicant} from "../ApplicantInterface";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-edit-ejob',
@@ -39,7 +40,8 @@ export class EditEjobComponent implements OnInit {
     private ejobService: EjobsService,
     private userService: UserService,
     private router: Router,
-    private ar: ActivatedRoute
+    private ar: ActivatedRoute,
+    private _snackBar: MatSnackBar,
   ) {
 
     this.form = this.formBuilder.group({
@@ -113,11 +115,20 @@ export class EditEjobComponent implements OnInit {
 
     this.ejobService.updateJobById(this.job._id, this.job).subscribe(
       (reponse) =>{
-        this.router.navigate(['', 'employers']);
+        //this.router.navigate(['', 'employers']);
+        this.openSnackBar("Job updated successfully", "");
       },
     );
   }
 
   viewProfile(){
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: "left",
+      verticalPosition: "top",
+    });
   }
 }
