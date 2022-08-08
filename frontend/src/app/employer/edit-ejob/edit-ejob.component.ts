@@ -8,10 +8,12 @@ import { mergeMap } from 'rxjs';
 import {globalVars} from "../../../environments/globalVars";
 import {Applicant} from "../ApplicantInterface";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-edit-ejob',
   templateUrl: './edit-ejob.component.html',
+  //template: `<ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>`,
   //styleUrls: ['./edit-ejob.component.css']
   styleUrls: ['../ejob.css']
 })
@@ -34,6 +36,9 @@ export class EditEjobComponent implements OnInit {
   applicants!: [{ type: Applicant }];
   applicationStatuses = globalVars.applicationStatuses;
   clickedApplicant! : Applicant;
+
+  //richtexteditor
+  public Editor = ClassicEditor;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -85,6 +90,7 @@ export class EditEjobComponent implements OnInit {
 
           this.form.get('status')?.setValue(this.job.status);
           this.job_status_selected =this.form.value.status;
+
         },
       )
 

@@ -12,10 +12,8 @@
         </p>
 
         <p>
-          <mat-form-field>
-            <mat-label>Description</mat-label>
-            <textarea matInput placeholder="" rows="10" formControlName="description"></textarea>
-          </mat-form-field>
+          <mat-label>Description</mat-label>
+          <ckeditor formControlName="description" [editor]="Editor"></ckeditor>
         </p>
 
         <p>

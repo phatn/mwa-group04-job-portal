@@ -13,11 +13,16 @@
         </p>
 
         <p>
+          <mat-label>Description</mat-label>
+          <ckeditor formControlName="description" [editor]="Editor" [disabled]="disableSelect"></ckeditor>
+        </p>
+
+        <!--p *ngIf="disableSelect">
           <mat-form-field>
             <mat-label>Description</mat-label>
             <textarea matInput placeholder="" rows="10" formControlName="description" [readonly]="disableSelect"></textarea>
           </mat-form-field>
-        </p>
+        </p-->
 
         <p>
           <mat-form-field>

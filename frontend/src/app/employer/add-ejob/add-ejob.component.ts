@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../../login/user.service";
 import {globalVars} from "../../../environments/globalVars";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-add-ejob',
@@ -14,11 +15,15 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['../ejob.css']
 })
 export class AddEjobComponent implements OnInit {
+  //form
   form!: FormGroup;
   jobTypes = globalVars.jobTypes;
   job_type_selected : string = globalVars.jobTypes[0].value;
   jobStatuses = globalVars.jobStatuses;
   job_status_selected : string = globalVars.jobStatuses[0].value;
+
+  //richtexteditor
+  public Editor = ClassicEditor;
 
   constructor(
     private formBuilder : FormBuilder,
