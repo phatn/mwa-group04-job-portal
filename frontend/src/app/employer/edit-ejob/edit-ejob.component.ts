@@ -56,7 +56,7 @@ export class EditEjobComponent implements OnInit {
 
     if(this.router.url.includes('view')){
       this.disableSelect = true;
-      this.form.disable();
+      //this.form.disable();
     }
 
     this.ar.paramMap

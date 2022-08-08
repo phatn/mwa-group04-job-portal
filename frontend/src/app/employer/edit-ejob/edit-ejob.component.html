@@ -8,56 +8,56 @@
         <p>
           <mat-form-field>
             <mat-label>Title</mat-label>
-            <input type="text" matInput placeholder="" formControlName="title">
+            <input type="text" matInput placeholder="" formControlName="title" [readonly]="disableSelect">
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field>
             <mat-label>Description</mat-label>
-            <textarea matInput placeholder="" rows="10" formControlName="description"></textarea>
+            <textarea matInput placeholder="" rows="10" formControlName="description" [readonly]="disableSelect"></textarea>
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field>
             <mat-label>Skills</mat-label>
-            <input type="text" matInput placeholder="" formControlName="skills">
+            <input type="text" matInput placeholder="" formControlName="skills" [readonly]="disableSelect">
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field>
             <mat-label>City</mat-label>
-            <input type="text" matInput placeholder="" formControlName="city">
+            <input type="text" matInput placeholder="" formControlName="city" [readonly]="disableSelect">
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field>
             <mat-label>State</mat-label>
-            <input type="text" matInput placeholder="" formControlName="state">
+            <input type="text" matInput placeholder="" formControlName="state" [readonly]="disableSelect">
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field>
             <mat-label>Country</mat-label>
-            <input type="text" matInput placeholder="" formControlName="country">
+            <input type="text" matInput placeholder="" formControlName="country" [readonly]="disableSelect">
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field>
             <mat-label>Salary</mat-label>
-            <input type="number" matInput placeholder="" formControlName="salary">
+            <input type="text" matInput placeholder="" formControlName="salary" [readonly]="disableSelect">
           </mat-form-field>
         </p>
 
         <p>
-          <mat-form-field>
+          <mat-form-field >
             <mat-label>Job Type</mat-label>
-            <mat-select formControlName="job_type" [(value)]="job_type_selected">
+            <mat-select formControlName="job_type" [(value)]="job_type_selected" [disabled]="disableSelect">
               <mat-option *ngFor="let job_type of jobTypes"
                           [value]="job_type.value" >
                 {{job_type.value}}
@@ -69,8 +69,8 @@
         <p>
           <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select formControlName="status" [(value)]="job_status_selected" required>
-              <mat-option *ngFor="let status of jobStatuses" [value]="status.value">
+            <mat-select formControlName="status" [(value)]="job_status_selected" [disabled]="disableSelect">
+              <mat-option *ngFor="let status of jobStatuses" [value]="status.value" >
                 {{status.value}}
               </mat-option>
             </mat-select>
@@ -79,7 +79,7 @@
 
         <div>
           <p>List of Applicants</p>
-          <table mat-table [dataSource]="applicants" class="mat-elevation-z8">
+          <table mat-table [dataSource]="applicants" class="mat-elevation-z0">
 
             <ng-container matColumnDef="fullname">
               <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -109,7 +109,6 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <!--tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr-->
             <tr
               mat-row
               (click)="clickedApplicant = row"
@@ -123,7 +122,7 @@
 
         <div class="button">
           <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button>
-          <button mat-raised-button color="primary" type="button" (click)="editEJob()" *ngIf="!disableSelect">Update</button>
+          <button mat-raised-button color="primary" type="button" (click)="editEJob()" *ngIf="!disableSelect" [disabled]="!form.valid">Update</button>
         </div>
 
       </div>

@@ -79,7 +79,7 @@
 
         <div class="button">
           <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button>
-          <button mat-raised-button color="primary" type="button" (click)="addEJob()">Create</button>
+          <button mat-raised-button color="primary" type="button" (click)="addEJob()" [disabled]="!form.valid">Create</button>
         </div>
 
       </form>
