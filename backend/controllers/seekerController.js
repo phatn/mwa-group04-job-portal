@@ -57,7 +57,8 @@ module.exports.applyJob = async function (req, res, next) {
         const {job_id, email} = req.body;
         const seeker = await Seeker.findOne({email: email});
         if(seeker) {
-            await Job.findByIdAndUpdate(job_id, {$addToSet: {"applied_by": seeker}})
+            seeker.status = 'submitted';
+            await Job.findByIdAndUpdate(job_id, {$addToSet: {"applied_by": {...seeker}}})
         }
         res.json({ success: 1 });
     } catch (error) {
