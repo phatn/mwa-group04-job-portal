@@ -64,7 +64,7 @@ p.job-short-description {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 0 1rem 1rem 1rem;
   overflow-y: scroll;
-  max-height: 45rem;
+  max-height: 50rem;
 }
 
 .job-heading {
