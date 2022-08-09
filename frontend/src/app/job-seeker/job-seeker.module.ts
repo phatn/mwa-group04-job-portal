@@ -5,8 +5,8 @@ import { MyJobsComponent } from './my-jobs/my-jobs.component';
 import { MaterialModule } from "../material.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { StringsJoinerPipe } from "../pipe/strings-joiner.pipe";
-import {AppModule} from "../app.module";
-import {StatusExtractorPipe} from "../pipe/status-extractor.pipe";
+import { StatusExtractorPipe } from "../pipe/status-extractor.pipe";
+import { RouterModule } from "@angular/router";
 
 
 
@@ -20,7 +20,12 @@ import {StatusExtractorPipe} from "../pipe/status-extractor.pipe";
     imports: [
         CommonModule,
         MaterialModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterModule.forChild([
+          {path: '', component: SearchJobsComponent},
+          {path: 'search-jobs', component: SearchJobsComponent},
+          {path: 'my-jobs', component: MyJobsComponent }
+        ]),
     ],
   exports: [
     SearchJobsComponent,
