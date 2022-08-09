@@ -21,8 +21,7 @@ export class AttachTokenInterceptor implements HttpInterceptor {
       return next.handle(request);
     } else {
       const headers = new HttpHeaders({
-        'Authorization': token,
-        'Content-Type': 'application/json'
+        'Authorization': token
       });
 
       const clone = request.clone({ headers });

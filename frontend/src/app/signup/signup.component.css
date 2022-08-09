@@ -41,3 +41,7 @@ mat-card-content {
   justify-content: space-between;
   padding-top: 2rem;
 }
+
+.resume-upload {
+  margin-left: 2rem;
+}

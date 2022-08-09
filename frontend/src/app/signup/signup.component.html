@@ -47,9 +47,14 @@
           </p>
 
           <p>
-            <mat-form-field>
-              <input type="text" matInput placeholder="Resume" formControlName="resume">
-            </mat-form-field>
+              <label for="resume">Resume</label>
+              <input
+                formControlName="file"
+                id="resume"
+                type="file"
+                class="resume-upload"
+                (change)="onFileChange($event)">
+
           </p>
 
           <p>
