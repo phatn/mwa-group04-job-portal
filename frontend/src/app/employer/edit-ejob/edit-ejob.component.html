@@ -25,9 +25,9 @@
         </p>
 
         <p>
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Country</mat-label>
-            <mat-select formControlName="country" [disabled]="disableSelect" (selectionChange)="refreshStates()">
+            <mat-select formControlName="country" (selectionChange)="refreshStates()" [disabled]="disableSelect">
               <mat-option *ngFor="let country of countries"
                           [value]="country.name" >
                 {{country.name}}
@@ -36,10 +36,11 @@
           </mat-form-field>
         </p>
 
+
         <p>
           <mat-form-field >
             <mat-label>State</mat-label>
-            <mat-select formControlName="state" [disabled]="disableSelect" (selectionChange)="refreshCities()">
+            <mat-select formControlName="state" (selectionChange)="refreshCities()" [disabled]="disableSelect">
               <mat-option *ngFor="let state of states"
                           [value]="state.name" >
                 {{state.name}}
@@ -51,7 +52,7 @@
         <p>
           <mat-form-field >
             <mat-label>City</mat-label>
-            <mat-select formControlName="city" [disabled]="disableSelect" >
+            <mat-select formControlName="city" [disabled]="disableSelect">
               <mat-option *ngFor="let city of cities"
                           [value]="city" >
                 {{city}}

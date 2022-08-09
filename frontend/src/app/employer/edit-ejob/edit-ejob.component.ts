@@ -86,11 +86,11 @@ export class EditEjobComponent implements OnInit {
           this.form.get('title')?.setValue(this.job.title);
           this.form.get('description')?.setValue(this.job.description);
           this.form.get('skills')?.setValue(this.job.skills.toString());
-          this.form.get('country')?.setValue(this.job.location.country);
+          this.form.get('country')?.patchValue(this.job.location.country);
           this.refreshStates();
-          this.form.get('state')?.setValue(this.job.location.state);
+          this.form.get('state')?.patchValue(this.job.location.state);
           this.refreshCities();
-          this.form.get('city')?.setValue(this.job.location.city);
+          this.form.get('city')?.patchValue(this.job.location.city);
 
 
           this.form.get('salary')?.setValue(this.job.salary);
@@ -140,7 +140,6 @@ export class EditEjobComponent implements OnInit {
     this.job.status  = this.form.value.status;
 
     this.job.applied_by = this.applicants;
-    console.log("this.job.applied_by: ", this.job.applied_by);
 
     this.ejobService.updateJobById(this.job._id, this.job).subscribe(
       (reponse) =>{
@@ -163,7 +162,6 @@ export class EditEjobComponent implements OnInit {
       const country: string = this.form.get('country')?.value;
       this.states = this.countries.find((c) => c.name === country)?.states || [];
     }
-    //this.refreshCities();
   }
 
   refreshCities(){

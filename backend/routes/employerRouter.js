@@ -24,9 +24,9 @@ router.post('/jobs/', auth.checkToken, auth.authEmployer, jobController.createEJ
     EMPLOYER
  */
 //host/employers/:employer_id       get employer info
-router.get('/employers/:employer_id', auth.checkToken, auth.authEmployer, employerController.getEmployerById);
+router.get('/:employer_id', auth.checkToken, auth.authEmployer, employerController.getEmployerById);
 
 //host/employers/:employer_id       update employer info
-router.patch('/employers/:employer_id', auth.checkToken, auth.authEmployer, auth.authEmployer, employerController.updateEmployerById);
+router.patch('/:employer_id', auth.checkToken, auth.authEmployer, auth.authEmployer, employerController.updateEmployerById);
 
 module.exports = router;

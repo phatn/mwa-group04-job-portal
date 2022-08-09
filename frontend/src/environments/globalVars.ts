@@ -23,6 +23,11 @@ export const globalVars = {
     {value: 'Active'},
     {value: 'Inactive'}
   ],
+
+  employerStatuses : [
+    {value: 'Active'},
+    {value: 'Inactive'}
+  ],
 };
 
 /*

@@ -8,6 +8,7 @@ import { EDashboardComponent } from './edashboard.component';
 import {ListEjobsComponent} from "./list-ejobs/list-ejobs.component";
 import { EditEjobComponent } from './edit-ejob/edit-ejob.component';
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
     EDashboardComponent,
     AddEjobComponent,
     ListEjobsComponent,
-    EditEjobComponent
+    EditEjobComponent,
+    EmployerProfileComponent
   ],
   exports: [
   ],
@@ -28,7 +30,9 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
       {path: '', component: EDashboardComponent},
       {path: 'jobs/add', component: AddEjobComponent},
       {path: 'jobs/edit/:job_id', component: EditEjobComponent},
-      {path: 'jobs/view/:job_id', component: EditEjobComponent}
+      {path: 'jobs/view/:job_id', component: EditEjobComponent},
+      {path: 'profile/edit', component: EmployerProfileComponent},
+      {path: 'profile/view', component: EmployerProfileComponent}
     ]),
     FormsModule,
   ]

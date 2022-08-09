@@ -6,11 +6,6 @@ import {globalVars} from "../../environments/globalVars";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 
-export interface IApplicant{
-  name: string,
-  education: string
-}
-
 @Component({
   selector: 'app-seeker-profile',
   templateUrl: './seeker-profile.component.html',
@@ -36,7 +31,6 @@ export class SeekerProfileComponent implements OnInit {
     this.initFormValue();
 
     const user = this.userService.decodeToken();
-    console.log("user: ", user);
     if(user && user.user_id) {
       this.userService.getSeekerById(user.user_id)
         .subscribe(
@@ -49,7 +43,7 @@ export class SeekerProfileComponent implements OnInit {
             this.form.get('skill_set')?.setValue(this.user.skill_set.join(','));
             this.form.get('yoe')?.setValue(this.user.yoe);
             this.form.get('resume')?.setValue(this.user.resume);
-            this.form.get('status')?.setValue(this.user.status);
+            this.form.get('status')?.patchValue(this.user.status);
           }
         )
     }
@@ -60,15 +54,27 @@ export class SeekerProfileComponent implements OnInit {
   }
 
   initFormValue(){
-    this.form = this.formBuilder.group({
-      fullname: ['', Validators.required],
-      email: ['', Validators.required],
-      education: ['', Validators.required],
-      skill_set: ['', Validators.required],
-      yoe: ['', Validators.required],
-      resume: ['', Validators.required],
-      status: ['', Validators.required]
-    });
+    if(this.disableSelect) {
+      this.form = this.formBuilder.group({
+        fullname: [''],
+        email: [''],
+        education: [''],
+        skill_set: [''],
+        yoe: [''],
+        resume: [''],
+        status: ['']
+      });
+    }else {
+      this.form = this.formBuilder.group({
+        fullname: ['', Validators.required],
+        email: ['', Validators.required],
+        education: ['', Validators.required],
+        skill_set: ['', Validators.required],
+        yoe: ['', Validators.required],
+        resume: ['', Validators.required],
+        status: ['', Validators.required]
+      });
+    }
   }
 
   cancel(){

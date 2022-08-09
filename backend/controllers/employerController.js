@@ -69,7 +69,7 @@ module.exports.signup = async function (req, res, next) {
                             const {url, secure_url} = result;
                             console.log(url, secure_url);
                             let resume = url;
-                            const status = 'active';
+                            const status = 'Active';
                             const seekerObj = {email, password, fullname, education, skill_set, yoe, resume, status};
                             const seeker = await Seeker.create(seekerObj);
                             const obj = { user_id: seeker._id, fullname: seeker.fullname, email: seeker.email, role: "seeker" };

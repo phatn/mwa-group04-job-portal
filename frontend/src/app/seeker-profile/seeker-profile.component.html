@@ -14,7 +14,7 @@
         <p>
           <mat-form-field>
             <mat-label>Email</mat-label>
-            <input type="text" matInput placeholder="" formControlName="email" [readonly]="disableSelect">
+            <input type="text" matInput placeholder="" formControlName="email" readonly>
           </mat-form-field>
         </p>
 
@@ -42,7 +42,7 @@
         <p>
           <mat-form-field>
             <mat-label>Resume</mat-label>
-            <a [href]="user.resume">
+            <a [href]="user?.resume" target="_blank" class="profile-resume">
               <input type="text" matInput placeholder="" formControlName="resume" [readonly]="disableSelect">
             </a>
           </mat-form-field>
@@ -51,8 +51,10 @@
         <p>
           <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select formControlName="status" [disabled]="disableSelect">
-              <mat-option *ngFor="let status of seekerStatuses" [value]="status.value" >
+            <mat-select formControlName="status"  [(value)]="user.status" >
+              <mat-option *ngFor="let status of seekerStatuses"
+                          [value]="status.value"
+                          >
                 {{status.value}}
               </mat-option>
             </mat-select>
