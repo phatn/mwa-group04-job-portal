@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import jwt_decode from 'jwt-decode';
 import {User} from "./UserInterface";
+import {Ejob} from "../employer/EJobInterface";
+import {ISeeker} from "../seeker-profile/SeekerInterface";
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +74,9 @@ export class UserService {
 
   getSeekerById(id: string) {
     return this.http.get(`${environment.apiUrl}/seekers/` + id);
+  }
+
+  updateSeekerById(seeker_id: string, seeker: ISeeker) {
+    return this.http.patch(`${environment.apiUrl}/seekers/` + seeker_id, seeker);
   }
 }

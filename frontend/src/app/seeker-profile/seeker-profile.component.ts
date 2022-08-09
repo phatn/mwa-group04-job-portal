@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../login/user.service";
 import {ISeeker} from "./SeekerInterface";
 import {globalVars} from "../../environments/globalVars";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 export interface IApplicant{
   name: string,
@@ -17,17 +19,19 @@ export interface IApplicant{
 })
 export class SeekerProfileComponent implements OnInit {
 
-  disableSelect = false;
+  disableSelect = true;
 
   form!: FormGroup;
 
-  user!: ISeeker;
+  public user!: ISeeker;
 
   seekerStatuses = globalVars.seekerStatuses;
 
   constructor(
     private userService: UserService,
-    private formBuilder : FormBuilder,) {
+    private formBuilder : FormBuilder,
+    private _snackBar: MatSnackBar,
+    private router: Router,) {
 
     this.initFormValue();
 
@@ -38,12 +42,17 @@ export class SeekerProfileComponent implements OnInit {
         .subscribe(
           (response) => {
             this.user = <ISeeker>response;
-            console.log("this.user: ", this.user);
+
+            this.form.get('fullname')?.setValue(this.user.fullname);
+            this.form.get('email')?.setValue(this.user.email);
+            this.form.get('education')?.setValue(this.user.education);
+            this.form.get('skill_set')?.setValue(this.user.skill_set.join(','));
+            this.form.get('yoe')?.setValue(this.user.yoe);
+            this.form.get('resume')?.setValue(this.user.resume);
+            this.form.get('status')?.setValue(this.user.status);
           }
         )
     }
-
-    const obj: IApplicant = {name : "seeker1", education : "master of CS"};
 
   }
 
@@ -63,10 +72,29 @@ export class SeekerProfileComponent implements OnInit {
   }
 
   cancel(){
-
+    this.router.navigate(['', 'seekers']);
   }
 
   updateProfile(){
+    this.user.fullname = this.form.value.fullname;
+    this.user.education = this.form.value.education;
+    this.user.skill_set = this.form.value.skill_set.split(",");
+    this.user.yoe= this.form.value.yoe;
+    this.user.resume = this.form.value.resume;
+    this.user.status = this.form.value.status;
 
+    this.userService.updateSeekerById(this.user._id, this.user).subscribe(
+      (response) =>{
+        this.openSnackBar("Profile updated successfully", "");
+      },
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: "left",
+      verticalPosition: "top",
+    });
   }
 }
