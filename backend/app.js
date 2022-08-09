@@ -33,7 +33,12 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: err });
 });
 
-app.listen(3000, () => {
-    console.log('App listening on port 3000');
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
+
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
     mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zzi3uw2.mongodb.net/myJobPortal`, {useNewUrlParser: true});
 });
