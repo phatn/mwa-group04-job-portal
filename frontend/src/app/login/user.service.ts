@@ -24,36 +24,6 @@ export class UserService {
     return this.http.post<{token:string}>(`${environment.apiUrl}/users`, formData);
   }
 
-  /*
-  signup(role:string, email:string, password:string, fullname:string, education:string, skills:string,
-           yeo:string, resume:any, organization:string, address:string, city:string, state:string, country:string) {
-
-    const formData = new FormData();
-    formData.append('role', role);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('fullname', fullname);
-    formData.append('education', education);
-    formData.append('skills', skills);
-    formData.append('yeo', yeo);
-    formData.append('resume', resume.value);
-    formData.append('organization', organization);
-    formData.append('address', address);
-    formData.append('city', city);
-    formData.append('state', state);
-    formData.append('country', country);
-
-    return this.http.post<{token:string}>(`${environment.apiUrl}/users/signup`,
-      { role, email, password, fullname, education, skills, yeo, resume, organization, address, city, state, country});
-
-
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'multipart/form-data');
-    let options = { headers: headers };
-    return this.http.post<{token:string}>(`${environment.apiUrl}/users/signup`, formData, options);
-  }
-  */
-
   persistToken(token: string) {
     localStorage.setItem("TOKEN", token);
   }

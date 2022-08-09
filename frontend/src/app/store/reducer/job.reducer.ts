@@ -1,7 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  jobApply,
-  jobApplySuccess,
   jobSeekerMyJob, jobSeekerMyJobResult,
   jobSeekerSearch,
   jobSeekerSearchResult

@@ -7,19 +7,19 @@ import {UserService} from "../../login/user.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
 
   isLoggedIn = false;
 
-  isSeeker = false;
+  role = '';
 
   fullname:string = '';
 
-  constructor(private router: Router, private userService: UserService, private zone: NgZone) {
+  constructor(private router: Router, private userService: UserService) {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         const {role, fullname} = this.userService.decodeToken();
-        this.isSeeker = (role === 'seeker');
+        this.role = role;
         this.fullname = fullname;
         if (event.url === '/login' || event.url === '/sign-up') {
           this.isLoggedIn = false;
@@ -31,17 +31,12 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   logout() {
-    localStorage.removeItem('TOKEN');
+    this.userService.clearToken();
     this.router.navigate(['/', 'login']);
   }
 
   ngOnInit(): void {
 
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.isLoggedIn = localStorage.getItem('TOKEN') ? true : false;
-  }
-
 
 }
