@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { UserService } from "./user.service";
 import { Router } from "@angular/router";
 import { Observable, Subject, takeUntil} from "rxjs";
@@ -44,9 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
     );
     this.loginForm = this.formBuilder.group({
-      email: [],
-      password: [],
-      role: []
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 

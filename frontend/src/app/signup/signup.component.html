@@ -96,7 +96,7 @@
         </div>
         <div class="button">
           <a mat-raised-button [routerLink]="['/', 'login']">Login</a>
-          <button mat-raised-button color="primary" type="submit">Sign Up</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!this.signUpForm.valid">Sign Up</button>
         </div>
 
       </form>
