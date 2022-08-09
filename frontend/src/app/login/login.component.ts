@@ -33,12 +33,11 @@ export class LoginComponent implements OnInit, OnDestroy {
           const {token} = response;
           if(token) {
             localStorage.setItem('TOKEN', token);
-            //router.navigate(['/', 'search-jobs'])
             const user = this.userService.decodeToken();
             if(user.role === 'employer') {
               router.navigate(['/', 'employers']);
             }else {
-              router.navigate(['/', 'search-jobs']);
+              router.navigate(['/', 'seekers']);
             }
           }
 

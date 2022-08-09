@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {signup} from "../store/action/user.actions";
-import {Observable, Subject, takeUntil} from "rxjs";
-import {UserService} from "../login/user.service";
-import {Router} from "@angular/router";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { signup } from "../store/action/user.actions";
+import { Observable, Subject, takeUntil } from "rxjs";
+import { UserService } from "../login/user.service";
+import { Router } from "@angular/router";
 
 interface Role {
   value: string;
@@ -55,7 +55,6 @@ export class SignupComponent implements OnInit {
       );
 
 
-
     this.signUpForm = this.formBuilder.group({
       role: [],
       email: [],
@@ -64,7 +63,8 @@ export class SignupComponent implements OnInit {
       education: [],
       skills:[],
       yoe: [],
-      resume: [],
+      file: [],
+      resume: [null],
       organization: [],
       address: [],
       city: [],
@@ -73,11 +73,33 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  onFileChange($event:any) {
+    if ($event.target.files.length > 0) {
+        const file = $event.target.files[0];
+        this.signUpForm.patchValue({
+          resume: file
+        });
+    }
+  }
+
   signup() {
     const {role, email, password, fullname, education, skills, yoe, organization, address, city, state, country} = this.signUpForm.value;
-    const obj = {role, email, password, fullname, education, skills, yoe, organization, address, city, state, country};
-    console.log(JSON.stringify(obj));
-    this.store.dispatch(signup(obj));
+    let formData = new FormData();
+    formData.append('role', role);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('fullname', fullname);
+    formData.append('education', education);
+    formData.append('skills', skills);
+    formData.append('yoe', yoe);
+    formData.append('resume', this.signUpForm.get('resume')?.value);
+    formData.append('organization', organization);
+    formData.append('address', address);
+    formData.append('city', city);
+    formData.append('state', state);
+    formData.append('country', country);
+
+    this.store.dispatch(signup({formData}));
   }
 
 
