@@ -17,13 +17,6 @@
           <ckeditor formControlName="description" [editor]="Editor" [disabled]="disableSelect"></ckeditor>
         </p>
 
-        <!--p *ngIf="disableSelect">
-          <mat-form-field>
-            <mat-label>Description</mat-label>
-            <textarea matInput placeholder="" rows="10" formControlName="description" [readonly]="disableSelect"></textarea>
-          </mat-form-field>
-        </p-->
-
         <p>
           <mat-form-field>
             <mat-label>Skills</mat-label>
@@ -32,23 +25,38 @@
         </p>
 
         <p>
-          <mat-form-field>
-            <mat-label>City</mat-label>
-            <input type="text" matInput placeholder="" formControlName="city" [readonly]="disableSelect">
-          </mat-form-field>
-        </p>
-
-        <p>
-          <mat-form-field>
-            <mat-label>State</mat-label>
-            <input type="text" matInput placeholder="" formControlName="state" [readonly]="disableSelect">
-          </mat-form-field>
-        </p>
-
-        <p>
-          <mat-form-field>
+          <mat-form-field >
             <mat-label>Country</mat-label>
-            <input type="text" matInput placeholder="" formControlName="country" [readonly]="disableSelect">
+            <mat-select formControlName="country" [disabled]="disableSelect" (selectionChange)="refreshStates()">
+              <mat-option *ngFor="let country of countries"
+                          [value]="country.name" >
+                {{country.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field >
+            <mat-label>State</mat-label>
+            <mat-select formControlName="state" [disabled]="disableSelect" (selectionChange)="refreshCities()">
+              <mat-option *ngFor="let state of states"
+                          [value]="state.name" >
+                {{state.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field >
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city" [disabled]="disableSelect" >
+              <mat-option *ngFor="let city of cities"
+                          [value]="city" >
+                {{city}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </p>
 
@@ -62,7 +70,7 @@
         <p>
           <mat-form-field >
             <mat-label>Job Type</mat-label>
-            <mat-select formControlName="job_type" [(value)]="job_type_selected" [disabled]="disableSelect">
+            <mat-select formControlName="job_type" [disabled]="disableSelect">
               <mat-option *ngFor="let job_type of jobTypes"
                           [value]="job_type.value" >
                 {{job_type.value}}
@@ -74,7 +82,7 @@
         <p>
           <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select formControlName="status" [(value)]="job_status_selected" [disabled]="disableSelect">
+            <mat-select formControlName="status" [disabled]="disableSelect">
               <mat-option *ngFor="let status of jobStatuses" [value]="status.value" >
                 {{status.value}}
               </mat-option>

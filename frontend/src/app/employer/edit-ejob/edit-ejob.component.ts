@@ -9,6 +9,8 @@ import {globalVars} from "../../../environments/globalVars";
 import {Applicant} from "../ApplicantInterface";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {ICountry, IState, ICity} from "../CountryInterface";
+import {UtilsService} from "../utilsService";
 
 @Component({
   selector: 'app-edit-ejob',
@@ -26,10 +28,15 @@ export class EditEjobComponent implements OnInit {
   //form
   form!: FormGroup;
   job!: Ejob;
+
+  //public variables for configuration
   jobTypes = globalVars.jobTypes;
-  job_type_selected! : string;
+  //job_type_selected! : string;
   jobStatuses = globalVars.jobStatuses;
-  job_status_selected! : string ;
+  //job_status_selected! : string ;
+  countries!: ICountry[];
+  states!: IState[];
+  cities!: ICity[];
 
   //table
   displayedColumns: string[] = ['fullname', 'skills', 'yoe', 'application_status'];
@@ -44,28 +51,27 @@ export class EditEjobComponent implements OnInit {
     private formBuilder : FormBuilder,
     private ejobService: EjobsService,
     private userService: UserService,
+    private utilsService: UtilsService,
     private router: Router,
     private ar: ActivatedRoute,
     private _snackBar: MatSnackBar,
   ) {
 
-    this.form = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      skills: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      country: ['', Validators.required],
-      salary: ['', Validators.required],
-      job_type: ['', Validators.required],
-      status: ['', Validators.required]
-    });
+    this.initForm();
 
+    //Edit / View mode
     if(this.router.url.includes('view')){
       this.disableSelect = true;
-      //this.form.disable();
     }
 
+    this.utilsService.getLocations()
+      .subscribe(
+        (response) => {
+          this.countries = <Array<ICountry>>response;
+        }
+      );
+
+    //Read job information and load into form
     this.ar.paramMap
       .pipe(
         mergeMap((params: any) => {
@@ -83,17 +89,32 @@ export class EditEjobComponent implements OnInit {
           this.form.get('city')?.setValue(this.job.location.city);
           this.form.get('state')?.setValue(this.job.location.state);
           this.form.get('country')?.setValue(this.job.location.country);
+          this.refreshStates();
+
           this.form.get('salary')?.setValue(this.job.salary);
 
           this.form.get('job_type')?.setValue(this.job.job_type);
-          this.job_type_selected =this.form.value.job_type;
+          //this.job_type_selected =this.form.value.job_type;
 
           this.form.get('status')?.setValue(this.job.status);
-          this.job_status_selected =this.form.value.status;
+          //this.job_status_selected =this.form.value.status;
 
         },
       )
+  }
 
+  initForm(){
+    this.form = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      skills: ['', Validators.required],
+      country: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      salary: ['', Validators.required],
+      job_type: ['', Validators.required],
+      status: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
@@ -121,13 +142,9 @@ export class EditEjobComponent implements OnInit {
 
     this.ejobService.updateJobById(this.job._id, this.job).subscribe(
       (reponse) =>{
-        //this.router.navigate(['', 'employers']);
         this.openSnackBar("Job updated successfully", "");
       },
     );
-  }
-
-  viewProfile(){
   }
 
   openSnackBar(message: string, action: string) {
@@ -136,5 +153,22 @@ export class EditEjobComponent implements OnInit {
       horizontalPosition: "left",
       verticalPosition: "top",
     });
+  }
+
+  refreshStates(){
+    console.log("refreshStates");
+    if(this.form.get('country')){
+      const country: string = this.form.get('country')?.value;
+      this.states = this.countries.find((c) => c.name === country)?.states || [];
+    }
+    //this.refreshCities();
+  }
+
+  refreshCities(){
+    console.log("refreshCities");
+    if(this.form.get('state')){
+      const state: string = this.form.get('state')?.value;
+      this.cities = this.states.find((c) => c.name === state)?.cities || [];
+    }
   }
 }

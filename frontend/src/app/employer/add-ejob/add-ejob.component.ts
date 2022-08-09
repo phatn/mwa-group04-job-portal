@@ -7,6 +7,8 @@ import {UserService} from "../../login/user.service";
 import {globalVars} from "../../../environments/globalVars";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {ICity, ICountry, IState} from "../CountryInterface";
+import {UtilsService} from "../utilsService";
 
 @Component({
   selector: 'app-add-ejob',
@@ -17,10 +19,15 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class AddEjobComponent implements OnInit {
   //form
   form!: FormGroup;
+
+  //public variables for configuration
   jobTypes = globalVars.jobTypes;
-  job_type_selected : string = globalVars.jobTypes[0].value;
+  //job_type_selected! : string;
   jobStatuses = globalVars.jobStatuses;
-  job_status_selected : string = globalVars.jobStatuses[0].value;
+  //job_status_selected! : string ;
+  countries!: ICountry[];
+  states!: IState[];
+  cities!: ICity[];
 
   //richtexteditor
   public Editor = ClassicEditor;
@@ -29,11 +36,19 @@ export class AddEjobComponent implements OnInit {
     private formBuilder : FormBuilder,
     private ejobService: EjobsService,
     private userService: UserService,
+    private utilsService: UtilsService,
     private router: Router,
     private _snackBar: MatSnackBar,
   ) {
 
     this.initFormValue();
+
+    this.utilsService.getLocations()
+      .subscribe(
+        (response) => {
+          this.countries = <Array<ICountry>>response;
+        }
+      );
   }
 
   initFormValue(){
@@ -69,8 +84,6 @@ export class AddEjobComponent implements OnInit {
       country: this.form.value.country
     };
     job.salary = this.form.value.salary;
-    job.job_type = this.job_type_selected;
-    job.status  = this.job_status_selected;
 
     const user = this.userService.decodeToken();
     job.created_by = user.user_id;
@@ -96,5 +109,22 @@ export class AddEjobComponent implements OnInit {
       horizontalPosition: "left",
       verticalPosition: "top",
     });
+  }
+
+  refreshStates(){
+    console.log("refreshStates");
+    if(this.form.get('country')){
+      const country: string = this.form.get('country')?.value;
+      this.states = this.countries.find((c) => c.name === country)?.states || [];
+    }
+    //this.refreshCities();
+  }
+
+  refreshCities(){
+    console.log("refreshCities");
+    if(this.form.get('state')){
+      const state: string = this.form.get('state')?.value;
+      this.cities = this.states.find((c) => c.name === state)?.cities || [];
+    }
   }
 }
