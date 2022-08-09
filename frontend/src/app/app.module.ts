@@ -22,12 +22,14 @@ import {EmployerModule} from "./employer/employer.module";
 import { AttachTokenInterceptor } from './attach-token.interceptor';
 import { jobApplyReducer } from "./store/reducer/job.apply.reducer";
 import { StatusExtractorPipe } from './pipe/status-extractor.pipe';
+import {SeekerProfileComponent} from "./seeker-profile/seeker-profile.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
-        SignupComponent
+        SignupComponent,
+      SeekerProfileComponent
     ],
     imports: [
         BrowserModule,

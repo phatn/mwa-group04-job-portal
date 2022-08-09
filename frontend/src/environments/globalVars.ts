@@ -18,6 +18,11 @@ export const globalVars = {
     {value: 'Hired'},
     {value: 'Rejected'},
   ],
+
+  seekerStatuses : [
+    {value: 'Active'},
+    {value: 'Inactive'}
+  ],
 };
 
 /*

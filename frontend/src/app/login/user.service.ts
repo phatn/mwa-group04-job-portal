@@ -37,4 +37,8 @@ export class UserService {
 
     return user;
   }
+
+  getSeekerById(id: string) {
+    return this.http.get(`${environment.apiUrl}/seekers/` + id);
+  }
 }

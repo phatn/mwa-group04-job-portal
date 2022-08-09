@@ -86,10 +86,12 @@ export class EditEjobComponent implements OnInit {
           this.form.get('title')?.setValue(this.job.title);
           this.form.get('description')?.setValue(this.job.description);
           this.form.get('skills')?.setValue(this.job.skills.toString());
-          this.form.get('city')?.setValue(this.job.location.city);
-          this.form.get('state')?.setValue(this.job.location.state);
           this.form.get('country')?.setValue(this.job.location.country);
           this.refreshStates();
+          this.form.get('state')?.setValue(this.job.location.state);
+          this.refreshCities();
+          this.form.get('city')?.setValue(this.job.location.city);
+
 
           this.form.get('salary')?.setValue(this.job.salary);
 
