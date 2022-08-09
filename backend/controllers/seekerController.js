@@ -69,7 +69,8 @@ module.exports.applyJob = async function (req, res, next) {
 
 module.exports.getMyJobs = async function (req, res, next) {
     try {
-        const {email} = req.body;
+        const {email} = req.params;
+        console.log(`email: ${email}`);
         const results = await Job.find({"applied_by.email": email});
         res.json(results);
     } catch (error) {
