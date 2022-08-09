@@ -35,7 +35,7 @@
           <mat-card-subtitle>{{job.location.city}}-{{job.location.state}}</mat-card-subtitle>
         </mat-card-title-group>
         <mat-card-content>
-          <p class="job-short-description">{{job.description}}</p>
+          <p class="job-short-description" [innerHtml]="job.description"></p>
         </mat-card-content>
       </mat-card>
       <mat-paginator *ngIf="showPaginator" [length]="(jobs$ | async)?.total"
@@ -69,10 +69,6 @@
           <span class="job-sub-heading">Job Type</span> <br/>
           <span>{{job.job_type}}</span>
         </div>
-      </div>
-
-      <div class="job-box">
-        <p class="job-heading">Qualifications</p>
       </div>
 
       <div class="job-box">
