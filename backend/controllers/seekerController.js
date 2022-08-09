@@ -1,4 +1,4 @@
-const Seeker = require('../models/SeekerModel');
+const Seeker = require('../models/seekerModel');
 const Job = require('../models/jobModel');
 
 module.exports.getSeekerById = async function (req, res, next) {

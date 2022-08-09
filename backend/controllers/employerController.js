@@ -1,4 +1,4 @@
-const Employer = require('../models/EmployerModel');
+const Employer = require('../models/employerModel');
 const Seeker = require('../models/seekerModel');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
