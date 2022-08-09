@@ -8,10 +8,10 @@ const userRouter = require('./routes/userRouter');
 const seekerRouter = require('./routes/seekerRouter');
 const employerRouter = require('./routes/employerRouter');
 const utilRouter = require('./routes/utilRouter');
+const dotenv = require("dotenv");
 
 //app
 const app = express();
-mongoose.connect('mongodb://localhost:27017/jobPortal', { useNewUrlParser: true });
 
 //middleware
 app.use(morgan('dev'));
@@ -33,4 +33,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: err });
 });
 
-app.listen(3000, () => { console.log("listening on 3000") });
+app.listen(3000, () => {
+    console.log('App listening on port 3000');
+    mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zzi3uw2.mongodb.net/myJobPortal`, {useNewUrlParser: true});
+});
