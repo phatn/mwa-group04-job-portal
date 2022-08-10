@@ -173,3 +173,9 @@ td
 .profile-resume input:hover {
   cursor: pointer;
 }
+
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 30rem;
+  overflow-y: scroll;
+  max-height: 30rem;
+}
