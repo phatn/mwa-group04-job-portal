@@ -179,3 +179,9 @@ td
   overflow-y: scroll;
   max-height: 30rem;
 }
+
+.btn-edit-profile {
+  padding: 0.3rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
