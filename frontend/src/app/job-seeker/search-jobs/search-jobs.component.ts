@@ -73,7 +73,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   onPageChange($event:PageEvent) {
     console.log(`Page: ${JSON.stringify($event)}`);
     const { keyword, city, state } = this.searchJobForm.value;
-    const page = $event.pageIndex.toString();
+    const page = ($event.pageIndex + 1).toString();
     this.store.dispatch(jobSeekerSearch({keyword, city, state, page}));
   }
 

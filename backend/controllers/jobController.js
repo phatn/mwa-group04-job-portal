@@ -110,7 +110,7 @@ module.exports.search = async function (req, res, next) {
         } else if(city) {
             result = await Job.paginate({"location.city": city , $text: {$search: keyword}}, options);
         } else if(state) {
-            results = await Job.find({"location.state": state , $text: {$search: keyword}});
+            results = await Job.paginate({"location.state": state , $text: {$search: keyword}}, options);
         } else if(keyword) {
             result = await Job.paginate({$text: {$search: keyword}}, options);
         } else {
