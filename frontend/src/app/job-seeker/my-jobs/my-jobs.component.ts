@@ -29,7 +29,7 @@ export class MyJobsComponent implements OnInit {
     this.appState$ = store.select('appReducer');
 
     this.jobs$ = this.appState$.pipe(
-      map(({jobsSearchResult}) => jobsSearchResult.jobs)
+      map(({myJobsResult}) => myJobsResult.jobs)
     )
   }
 

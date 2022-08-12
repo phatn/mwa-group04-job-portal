@@ -24,6 +24,8 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   appState$: Observable<AppState>;
 
+  jobsResult$: Observable<any>;
+
   job$: Observable<any>;
 
   jobApplyResult$!: Observable<any>;
@@ -49,6 +51,10 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
     this.job$ = new Observable<Job>();
     this.destroy$.next(false);
     this.appState$ = store.select('appReducer');
+
+    this.jobsResult$ = this.appState$.pipe(
+      map(({jobsSearchResult}) => jobsSearchResult)
+    )
 
     this.appState$.pipe(takeUntil(this.destroy$))
       .subscribe(response => {

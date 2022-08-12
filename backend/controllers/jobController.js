@@ -94,7 +94,6 @@ module.exports.createJobs = async function (req, res, next) {
 }
 
 module.exports.search = async function (req, res, next) {
-
     try {
         const { keyword, city, state, page } = req.query;
         const options = {
@@ -103,20 +102,20 @@ module.exports.search = async function (req, res, next) {
         };
         let result;
         if(city && state) {
-
             result = await Job.paginate({$and: [{"location.city": city}, {"location.state": state}],
                 $text: {$search: keyword}}, options);
 
         } else if(city) {
             result = await Job.paginate({"location.city": city , $text: {$search: keyword}}, options);
         } else if(state) {
-            results = await Job.paginate({"location.state": state , $text: {$search: keyword}}, options);
+            result = await Job.paginate({"location.state": state , $text: {$search: keyword}}, options);
         } else if(keyword) {
             result = await Job.paginate({$text: {$search: keyword}}, options);
         } else {
             result = await Job.paginate({}, options);
         }
-        res.json({data: result.docs, total: result.totalDocs});
+
+        res.json({jobs: result.docs, total: result.totalDocs});
     } catch (error) {
         next(error);
     }

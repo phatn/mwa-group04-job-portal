@@ -6,8 +6,8 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import jwt_decode from "jwt-decode";
 import { User } from "../../login/UserInterface";
-import {UserService} from "../../login/user.service";
-import {Router} from "@angular/router";
+import { UserService} from "../../login/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -28,19 +28,23 @@ export class HeaderComponent implements OnInit {
     this.appState$ = this.store.select('appReducer');
 
     this.credential$ = this.appState$.pipe(map(({token}) => {
-      if(token) {
-        const {role, fullname} = jwt_decode(token) as User;
-        return { role, fullname };
+      let newToken = token || localStorage.getItem('TOKEN');
+      if(newToken) {
+        const { role, fullname } = jwt_decode(newToken) as User;
+        if(role && fullname) {
+          return { role, fullname };
+        } else {
+          return {role: '', fullname: ''}
+        }
       } else {
         return {role: '', fullname: ''}
       }
-
     }));
   }
 
   logout() {
-    this.store.dispatch(logout());
     this.userService.clearToken();
+    this.store.dispatch(logout());
     this.router.navigate(['/', 'login']);
   }
 
