@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  loginError$!: Observable<string>;
+
   constructor(private formBuilder : FormBuilder,
               private userService: UserService,
               private router: Router,
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.appState$ = this.store.select('appReducer');
 
     this.token$ = this.appState$.pipe(map(({token}) => token));
+    this.loginError$ = this.appState$.pipe(map(({loginError}) => loginError));
 
     this.appState$.pipe(takeUntil(this.destroy$)) .subscribe(response => {
         const { token } = response;

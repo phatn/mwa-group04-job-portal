@@ -13,6 +13,7 @@ export const RESET_MESSAGE = '[App] Reset Message';
 
 export const LOGIN = '[Login Page] Login';
 export const LOGIN_SUCCESS = '[Login Page] Login Success';
+export const LOGIN_FAIL = '[Login Page] Login Fail';
 
 export const SIGNUP = '[Signup Page] Signup';
 export const SIGNUP_SUCCESS = '[Signup Page] Signup Success';
@@ -33,10 +34,11 @@ export const resetMessage = createAction(RESET_MESSAGE);
 
 export const login = createAction(LOGIN, props<{email:string, password:string}>());
 export const loginSuccess = createAction(LOGIN_SUCCESS, props<{token:string}>());
+export const loginFail = createAction(LOGIN_FAIL, props<{loginError:string}>());
 
 export const signup = createAction(SIGNUP, props<{formData: FormData}>());
 export const signupSuccess = createAction(SIGNUP_SUCCESS, props<{ token:string }>());
 
-export const signupFail = createAction(SIGNUP_FAIL, props<{token:string}>());
+export const signupFail = createAction(SIGNUP_FAIL);
 
 export const logout = createAction(LOGOUT);

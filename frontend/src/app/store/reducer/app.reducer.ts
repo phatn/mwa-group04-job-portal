@@ -4,7 +4,7 @@ import {
   jobApply, jobApplyResult,
   jobSeekerMyJob, jobSeekerMyJobResult,
   jobSeekerSearch,
-  jobSeekerSearchResult, login, loginSuccess, logout, resetMessage, signup, signupSuccess
+  jobSeekerSearchResult, login, loginFail, loginSuccess, logout, resetMessage, signup, signupSuccess
 } from "../action/app.actions";
 import { Job } from "../../job-seeker/search-jobs/job.model";
 
@@ -14,7 +14,8 @@ export interface AppState {
   jobApplyResult: { success: string, error: string },
   credential: {email: string, password: string},
   token: string,
-  formData: FormData
+  formData: FormData,
+  loginError: string
 }
 
 
@@ -24,7 +25,8 @@ export const initialState: AppState =  {
   jobApplyResult: {success: '', error: '' },
   credential: {email: '', password: ''},
   token: '',
-  formData: new FormData()
+  formData: new FormData(),
+  loginError: ''
 };
 
 export const appReducer = createReducer(
@@ -40,5 +42,6 @@ export const appReducer = createReducer(
   on(loginSuccess, (state, {token}) => ({...state, token})),
   on(logout, _ => initialState),
   on(signup, state => ({...state})),
-  on(signupSuccess, (state, {token}) => ({...initialState, token}))
+  on(signupSuccess, (state, {token}) => ({...initialState, token})),
+  on(loginFail, (sate, {loginError}) => ({...sate, loginError}))
 );

@@ -44,3 +44,7 @@ mat-card-content {
 #login-card {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+.error-message {
+  padding-top: 2rem;
+}

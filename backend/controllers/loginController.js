@@ -15,7 +15,8 @@ module.exports.login = async function (req, res, next) {
             if (err) {
                 next({ error: err });
             } else if (!isMatch) {
-                next({ error: "password not matched" });
+                console.log(`Password not matched!!!`);
+                next({ error: "Login failed!" });
             } else {
                 console.log("Seeker Password matches!");
                 token = jwt.sign({ user_id: userdb._id, fullname: userdb.fullname, email: userdb.email, role: "seeker" }, 'SECRET');
@@ -30,7 +31,8 @@ module.exports.login = async function (req, res, next) {
                 if (err) {
                     next({ error: err });
                 } else if (!isMatch) {
-                    next({ error: "password not matched" });
+                    console.log(`Password not matched!!!`);
+                    next({ error: "Login failed!" });
                 } else {
                     console.log("Employer Password matches!");
                     token = jwt.sign({ user_id: userdb._id, fullname: userdb.fullname, email: userdb.email, role: "employer" }, 'SECRET');
@@ -39,7 +41,8 @@ module.exports.login = async function (req, res, next) {
                 }
             });
         } else {
-            next({ error: "email not matched" });
+            console.log(`Email not matched!!!`);
+            next({ error: "Login failed!" });
         }
     }
 }

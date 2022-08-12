@@ -20,7 +20,7 @@
           <a mat-raised-button [routerLink]="['/', 'sign-up']">Sign Up</a>
           <button mat-raised-button color="primary" type="submit" [disabled]="!this.loginForm.valid" >Login</button>
         </div>
-
+        <mat-error *ngIf="(loginError$ | async)"><p class="error-message">{{loginError$ | async}}</p></mat-error>
       </form>
     </mat-card-content>
   </mat-card>
