@@ -1,6 +1,13 @@
-import {Component, NgZone, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Store} from "@ngrx/store";
+import { AppState} from "../../store/reducer/app.reducer";
+import { logout } from "../../store/action/app.actions";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import jwt_decode from "jwt-decode";
+import { User } from "../../login/UserInterface";
 import {UserService} from "../../login/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,28 +16,30 @@ import {UserService} from "../../login/user.service";
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn = false;
+  token$!: Observable<string>;
 
-  role = '';
+  credential$!: Observable<{role: string, fullname: string}>;
 
-  fullname:string = '';
+  appState$: Observable<AppState>;
 
-  constructor(private router: Router, private userService: UserService) {
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationEnd) {
-        const {role, fullname} = this.userService.decodeToken();
-        this.role = role;
-        this.fullname = fullname;
-        if (event.url === '/login' || event.url === '/sign-up') {
-          this.isLoggedIn = false;
-        } else {
-          this.isLoggedIn = true;
-        }
+  constructor(private store: Store<{appReducer: AppState}>,
+              private userService: UserService,
+              private router: Router) {
+    this.appState$ = this.store.select('appReducer');
+
+    this.credential$ = this.appState$.pipe(map(({token}) => {
+      if(token) {
+        const {role, fullname} = jwt_decode(token) as User;
+        return { role, fullname };
+      } else {
+        return {role: '', fullname: ''}
       }
-    });
+
+    }));
   }
 
   logout() {
+    this.store.dispatch(logout());
     this.userService.clearToken();
     this.router.navigate(['/', 'login']);
   }

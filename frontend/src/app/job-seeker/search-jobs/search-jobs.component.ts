@@ -1,14 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import {Observable, Subject, takeUntil} from "rxjs";
-import {jobApply, jobApplySuccess, jobSeekerSearch} from "../../store/action/seeker.actions";
+import { Observable, Subject, takeUntil} from "rxjs";
 import { Job } from "./job.model";
 import { map } from "rxjs/operators";
-import {UserService} from "../../login/user.service";
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
-import {PageEvent} from "@angular/material/paginator";
+import { UserService } from "../../login/user.service";
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import { PageEvent } from "@angular/material/paginator";
+import { AppState } from "../../store/reducer/app.reducer";
+import { jobApply, jobSeekerSearch, resetMessage } from "../../store/action/app.actions";
 
 @Component({
   selector: 'app-search-jobs',
@@ -21,25 +22,17 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  jobs$: Observable<{data: Array<Job>, total:number}>;
+  appState$: Observable<AppState>;
 
-  jobApplyResult$: Observable<string> = new Observable<string>();
+  job$: Observable<any>;
 
-  job$: Observable<Job> = new Observable<Job>();
+  jobApplyResult$!: Observable<any>;
 
-  showPaginator:boolean = false;
-
-  search() {
-    const { keyword, city, state } = this.searchJobForm.value;
-    const page = "0";
-    this.store.dispatch(jobSeekerSearch({keyword, city, state, page}));
-    this.showPaginator = true;
-  }
+  showPaginator$: Observable<boolean> = new Observable<false>();
 
   showDetail(job_id: string) {
-    this.job$ = this.jobs$.pipe(
-      map((jobs: {data: any[], total:number}) => jobs.data.find((job: { _id: string; }) => job._id == job_id))
-    )
+    this.job$ = this.appState$.pipe(map(({jobsSearchResult}) =>
+        jobsSearchResult.jobs.find(job => job._id == job_id)));
   }
 
   apply(job_id: string) {
@@ -51,18 +44,26 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
               private router: Router,
               private userService: UserService,
               private _snackBar: MatSnackBar,
-              private store: Store<{jobReducer: any, jobApplyReducer: any}>) {
+              private store: Store<{appReducer: AppState}>) {
 
+    this.job$ = new Observable<Job>();
+    this.destroy$.next(false);
+    this.appState$ = store.select('appReducer');
 
-    this.jobs$ = store.select('jobReducer');
-    this.jobApplyResult$ = store.select('jobApplyReducer');
-
-    this.jobApplyResult$.pipe(takeUntil(this.destroy$))
+    this.appState$.pipe(takeUntil(this.destroy$))
       .subscribe(response => {
-      if(response) {
+        const {  jobApplyResult } = response;
+      if(jobApplyResult.success) {
         this.openSnackBar("Job applied, good luck!", "");
+        this.store.dispatch(resetMessage());
       }
     })
+
+    this.showPaginator$ = this.appState$.pipe(
+      map(({jobsSearchResult}) => jobsSearchResult.total > 0)
+    );
+
+
     this.searchJobForm = this.formBuilder.group({
       keyword: [],
       city: [],
@@ -70,8 +71,12 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
     });
   }
 
+  search() {
+    const { keyword, city, state } = this.searchJobForm.value;
+    this.store.dispatch(jobSeekerSearch({keyword, city, state, page: '0'}));
+  }
+
   onPageChange($event:PageEvent) {
-    console.log(`Page: ${JSON.stringify($event)}`);
     const { keyword, city, state } = this.searchJobForm.value;
     const page = ($event.pageIndex + 1).toString();
     this.store.dispatch(jobSeekerSearch({keyword, city, state, page}));

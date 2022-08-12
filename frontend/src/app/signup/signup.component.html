@@ -89,14 +89,20 @@
           </p>
 
           <p>
-            <mat-form-field>
-              <input type="text" matInput placeholder="Country" formControlName="country">
+            <mat-form-field appearance="fill">
+              <mat-label>Select Country</mat-label>
+              <mat-select (selectionChange)="onRoleChange($event)" formControlName="country">
+                <mat-option *ngFor="let country of countries" [value]="country.value">
+                  {{country.viewValue}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
+
           </p>
         </div>
         <div class="button">
           <a mat-raised-button [routerLink]="['/', 'login']">Login</a>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!this.signUpForm.valid">Sign Up</button>
+          <button mat-raised-button color="primary" type="submit">Sign Up</button>
         </div>
 
       </form>

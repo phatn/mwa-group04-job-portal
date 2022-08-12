@@ -15,14 +15,10 @@ import { UserService } from "./login/user.service";
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from "./store/effect/user.effects";
-import { JobEffects } from "./store/effect/job.effects";
-import { jobReducer } from "./store/reducer/job.reducer";
-import { userReducer } from "./store/reducer/user.reducer";
-import {EmployerModule} from "./employer/employer.module";
 import { AttachTokenInterceptor } from './attach-token.interceptor';
-import { jobApplyReducer } from "./store/reducer/job.apply.reducer";
-import { StatusExtractorPipe } from './pipe/status-extractor.pipe';
-import {SeekerProfileComponent} from "./seeker-profile/seeker-profile.component";
+import { SeekerProfileComponent } from "./seeker-profile/seeker-profile.component";
+import { JobSeekerEffects } from "./store/effect/job.seeker.effects";
+import { appReducer } from "./store/reducer/app.reducer";
 
 @NgModule({
     declarations: [
@@ -40,8 +36,8 @@ import {SeekerProfileComponent} from "./seeker-profile/seeker-profile.component"
         MaterialModule,
         ReactiveFormsModule,
         HttpClientModule,
-        StoreModule.forRoot({userReducer: userReducer, jobReducer: jobReducer, jobApplyReducer: jobApplyReducer}),
-        EffectsModule.forRoot([UserEffects, JobEffects])
+        StoreModule.forRoot({appReducer: appReducer }),
+        EffectsModule.forRoot([UserEffects, JobSeekerEffects])
     ],
     providers: [
         UserService,

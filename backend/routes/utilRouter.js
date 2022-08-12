@@ -1,16 +1,16 @@
 const express = require('express');
 const utilController = require('../controllers/utilController');
-
+const {checkToken} = require('../middlewares/auth');
 const router = express.Router();
 
 
 //for testing purpuse
-router.post('/location', utilController.createLocationDb);
+router.post('/location', checkToken, utilController.createLocationDb);
 
-router.get('/location', utilController.getCountries);
+router.get('/location', checkToken, utilController.getCountries);
 
-router.get('/location/:country_id', utilController.getStates);
+router.get('/location/:country_id', checkToken, utilController.getStates);
 
-router.get('/location/:country_id/:state_id', utilController.getCities);
+router.get('/location/:country_id/:state_id', checkToken, utilController.getCities);
 
 module.exports = router;

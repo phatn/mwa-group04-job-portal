@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const loginController = require('../controllers/loginController');
 const employerController = require('../controllers/employerController');
-const auth = require('../middlewares/auth');
+const {checkToken} = require('../middlewares/auth');
 const multer = require('multer');
 
 //login

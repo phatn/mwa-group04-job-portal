@@ -58,6 +58,7 @@ module.exports.createEmployers = async function (req, res, next) {
 }
 
 module.exports.signup = async function (req, res, next) {
+
     try {
         const {role, email, password, fullname, education, skills, yoe, organization, address, city, state, country} = req.body;
         if(role === 'seeker') {
@@ -74,7 +75,7 @@ module.exports.signup = async function (req, res, next) {
                             const seeker = await Seeker.create(seekerObj);
                             const obj = { user_id: seeker._id, fullname: seeker.fullname, email: seeker.email, role: "seeker" };
                             const token = jwt.sign(obj, 'SECRET');
-                            return res.status(200).json({ token: token });
+                            return res.status(200).json({ token });
                         } else {
                             next(error);
                         }
@@ -88,7 +89,7 @@ module.exports.signup = async function (req, res, next) {
                 const seeker = await Seeker.create(seekerObj);
                 const obj = { user_id: seeker._id, fullname: seeker.fullname, email: seeker.email, role: "seeker" };
                 const token = jwt.sign(obj, 'SECRET');
-                return res.status(200).json({ token: token });
+                return res.status(200).json({ token });
             }
 
         } else {
@@ -100,7 +101,7 @@ module.exports.signup = async function (req, res, next) {
             }
             const employer = await Employer.create({email, password, fullname, organization, location});
             const token = jwt.sign({ user_id: employer._id, fullname: employer.fullname, email: employer.email, role: "employeer" }, 'SECRET');
-            return res.status(200).json({ token: token });
+            return res.status(200).json({ token });
         }
     } catch (error) {
         next(error);

@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
-import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
+import { map, catchError, exhaustMap } from 'rxjs/operators';
 
 import { JobSeekerService } from "../../job-seeker/search-jobs/job-seeker.service";
 import {
   JOB_SEEKER_APPLY, JOB_SEEKER_MY_JOB,
   JOB_SEEKER_SEARCH,
-  jobApplySuccess, jobSeekerMyJobResult,
-  jobSeekerSearch,
-  jobSeekerSearchResult
-} from "../action/seeker.actions";
-import {Job} from "../../job-seeker/search-jobs/job.model";
+  jobApplyResult, jobSeekerMyJobResult,
+  jobSeekerSearchResult, RESET_MESSAGE, resetMessage
+} from "../action/app.actions";
 
 @Injectable()
-export class JobEffects {
+export class JobSeekerEffects {
 
   jobSearch$ = createEffect(() =>  this.actions$.pipe(
       ofType(JOB_SEEKER_SEARCH),
@@ -22,7 +20,8 @@ export class JobEffects {
         this.jobSeekerService.searchJobs(action.keyword, action.city, action.state, action.page)
         .pipe(
           map(response => {
-            return jobSeekerSearchResult({response});
+            const {jobs, total} = response;
+            return jobSeekerSearchResult({ jobs, total });
           }),
           catchError(() => EMPTY))
       )
@@ -34,7 +33,8 @@ export class JobEffects {
       exhaustMap((action: {email: string}) => this.jobSeekerService.getMyJobs(action.email)
         .pipe(
           map(response => {
-            return jobSeekerMyJobResult({response});
+            const {jobs, total} = response;
+            return jobSeekerMyJobResult({ jobs, total });
           }),
           catchError(() => EMPTY))
       )
@@ -45,14 +45,14 @@ export class JobEffects {
       ofType(JOB_SEEKER_APPLY),
       exhaustMap((action: {job_id:string, email: string}) => this.jobSeekerService.applyJob(action.job_id, action.email)
         .pipe(
-          map(success => {
-            return jobApplySuccess(success);
+          map(response => {
+            const { success, error } = response;
+            return jobApplyResult({success, error});
           }),
           catchError(() => EMPTY))
       )
     )
   );
-
 
 
   constructor(

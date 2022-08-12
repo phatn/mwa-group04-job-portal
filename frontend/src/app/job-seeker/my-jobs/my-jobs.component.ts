@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {JobSeekerService} from "../search-jobs/job-seeker.service";
-import {Observable} from "rxjs";
-import {Job} from "../search-jobs/job.model";
-import {Store} from "@ngrx/store";
-import {jobSeekerMyJob} from "../../store/action/seeker.actions";
-import {UserService} from "../../login/user.service";
+import { JobSeekerService } from "../search-jobs/job-seeker.service";
+import { Observable } from "rxjs";
+import { Job } from "../search-jobs/job.model";
+import { Store } from "@ngrx/store";
+import { UserService } from "../../login/user.service";
+import { map } from "rxjs/operators";
+import { AppState } from "../../store/reducer/app.reducer";
+import { jobSeekerMyJob } from "../../store/action/app.actions";
 
 
 @Component({
@@ -15,12 +17,20 @@ import {UserService} from "../../login/user.service";
 export class MyJobsComponent implements OnInit {
 
   displayedColumns: string[] = ['SNo.', 'Job Title', 'Location', 'Status'];
-  jobs$: Observable<Array<Job>>;
+
+  appState$: Observable<AppState>;
+
+  jobs$!: Observable<Array<Job>>;
+
   constructor(private jobSeekerService: JobSeekerService,
               private userService: UserService,
-              private store: Store<{jobReducer: any, jobApplyReducer: any}>) {
+              private store: Store<{ appReducer: any }>) {
 
-    this.jobs$ = store.select('jobReducer');
+    this.appState$ = store.select('appReducer');
+
+    this.jobs$ = this.appState$.pipe(
+      map(({jobsSearchResult}) => jobsSearchResult.jobs)
+    )
   }
 
   ngOnInit(): void {

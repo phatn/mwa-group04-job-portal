@@ -38,6 +38,9 @@ mat-card-content {
 
 .button {
   display: flex;
-
   justify-content: space-between;
+}
+
+#login-card {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

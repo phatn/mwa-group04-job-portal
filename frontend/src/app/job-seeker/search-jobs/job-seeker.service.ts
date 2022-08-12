@@ -12,7 +12,7 @@ export class JobSeekerService {
   constructor(private http: HttpClient) {
   }
 
-  searchJobs(keyword: string, city: string, state:string, page:number): Observable<{data:Array<Job>, total:number}> {
+  searchJobs(keyword: string, city: string, state:string, page:number): Observable<{ jobs: Array<Job>, total:number }> {
     const queryMap = new Map();
     queryMap.set('page', page);
     if(keyword) {
@@ -32,17 +32,17 @@ export class JobSeekerService {
       query += (k + '=' + v) + '&';
     })
 
-    return this.http.get<{data:Array<Job>, total:number}>(`${environment.apiUrl}/jobs/search?${query}`);
+    return this.http.get<{ jobs: Array<Job>, total:number }>(`${environment.apiUrl}/jobs/search?${query}`);
   }
 
   applyJob(job_id: string, email: string) {
-    return this.http.patch<{success:string}>(`${environment.apiUrl}/seekers/job/${job_id}`, {
+    return this.http.patch<{ success: string, error: string}>(`${environment.apiUrl}/seekers/job/${job_id}`, {
       job_id,
       email
     });
   }
 
   getMyJobs(email:string) {
-    return this.http.get<{data:Array<Job>, total:number}>(`${environment.apiUrl}/seekers/my-job/${email}`);
+    return this.http.get<{ jobs:Array<Job>, total:number }>(`${environment.apiUrl}/seekers/my-job/${email}`);
   }
 }

@@ -8,9 +8,7 @@ body {
   min-height: 100vh;
 }
 
+
 #main-container {
-  padding-left: 10rem;
-  padding-right: 10rem;
-  padding-top: 2rem;
-  padding-bottom: 10rem;
+  padding: 2rem 10rem 0 10rem;
 }

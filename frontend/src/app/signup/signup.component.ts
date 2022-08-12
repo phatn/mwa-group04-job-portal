@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { signup } from "../store/action/user.actions";
-import { Observable, Subject, takeUntil } from "rxjs";
+import { signup } from "../store/action/app.actions";
+import { Observable, Subject } from "rxjs";
 import { UserService } from "../login/user.service";
 import { Router } from "@angular/router";
+import { AppState } from "../store/reducer/app.reducer";
 
-interface Role {
+interface SelectControl {
   value: string;
   viewValue: string;
 }
+
 
 @Component({
   selector: 'app-signup',
@@ -22,54 +24,57 @@ export class SignupComponent implements OnInit {
 
   isSeeker:boolean = true;
 
-  roles: Role[] = [
+  roles: SelectControl[] = [
     {value: 'seeker', viewValue: 'Seeker'},
     {value: 'employer', viewValue: 'Employer'}
   ];
 
-  token$!: Observable<any>;
+  countries: SelectControl[] = [
+    {value: 'USA', viewValue: 'USA'},
+    {value: 'Canada', viewValue: 'Canada'}
+  ];
+
+  appState$: Observable<AppState>;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private formBuilder : FormBuilder,
               private userService: UserService,
               private router: Router,
-              private store: Store<{userReducer: any}>
-  ) {
+              private store: Store<{appReducer: AppState}>) {
+    this.appState$ = this.store.select('appReducer');
 
-    store.select('userReducer')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        response => {
-          const {token} = response;
-          if(token) {
+    this.appState$.subscribe(response => {
+        const { token } = response;
+        if(token) {
+          const { role } = this.userService.diriveUserFromToken(token);
+          if(role) {
             localStorage.setItem('TOKEN', token);
-            const user = this.userService.decodeToken();
-            if(user.role === 'employer') {
+            if(role === 'employer') {
               router.navigate(['/', 'employers']);
-            }else {
-              router.navigate(['/', 'search-jobs']);
+            } else if(role === 'seeker'){
+              router.navigate(['/', 'seekers']);
             }
           }
         }
-      );
+      })
 
 
     this.signUpForm = this.formBuilder.group({
       role: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
       password: ['', Validators.required],
       fullname: ['', Validators.required],
-      education: [],
-      skills:[],
-      yoe: [],
-      file: [],
+      education: ['', Validators.required],
+      skills:['', Validators.required],
+      yoe: ['', Validators.required],
+      file: ['', Validators.required],
       resume: [null],
-      organization: [],
-      address: [],
-      city: [],
-      state: [],
-      country: []
+      organization: [''],
+      address: [''],
+      city: [''],
+      state: [''],
+      country: ['']
     });
   }
 
@@ -102,12 +107,31 @@ export class SignupComponent implements OnInit {
     this.store.dispatch(signup({formData}));
   }
 
-
   onRoleChange($event:any) {
-    this.isSeeker = $event.value === 'seeker';
+    this.isSeeker = ($event.value === 'seeker');
+    this.signUpForm.clearValidators();
+    this.signUpForm.controls['role'].setValidators(Validators.required);
+    this.signUpForm.controls['email'].setValidators([Validators.required, Validators.email]);
+    this.signUpForm.controls['password'].setValidators(Validators.required);
+    this.signUpForm.controls['fullname'].setValidators(Validators.required);
+
+    if(this.isSeeker) {
+      this.signUpForm.controls['education'].setValidators(Validators.required);
+      this.signUpForm.controls['skills'].setValidators(Validators.required);
+      this.signUpForm.controls['yoe'].setValidators(Validators.required);
+      this.signUpForm.controls['file'].setValidators(Validators.required);
+
+    } else {
+      this.signUpForm.controls['organization'].setValidators(Validators.required);
+      this.signUpForm.controls['address'].setValidators(Validators.required);
+      this.signUpForm.controls['city'].setValidators(Validators.required);
+      this.signUpForm.controls['state'].setValidators(Validators.required);
+      this.signUpForm.controls['country'].setValidators(Validators.required);
+    }
   }
 
   ngOnInit(): void {
+
   }
 
 }
