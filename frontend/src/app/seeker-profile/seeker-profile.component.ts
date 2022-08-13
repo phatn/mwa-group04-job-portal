@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../login/user.service";
 import {ISeeker} from "./SeekerInterface";
 import {globalVars} from "../../environments/globalVars";
@@ -37,13 +37,40 @@ export class SeekerProfileComponent implements OnInit {
           (response) => {
             this.user = <ISeeker>response;
 
-            this.form.get('fullname')?.setValue(this.user.fullname);
-            this.form.get('email')?.setValue(this.user.email);
-            this.form.get('education')?.setValue(this.user.education);
-            this.form.get('skill_set')?.setValue(this.user.skill_set.join(','));
-            this.form.get('yoe')?.setValue(this.user.yoe);
-            this.form.get('resume')?.setValue(this.user.resume);
-            this.form.get('status')?.patchValue(this.user.status);
+            const fullNameControl = this.form.get('fullname');
+            if(fullNameControl) {
+              fullNameControl.setValue(this.user.fullname);
+            }
+
+            const emailControl =  this.form.get('email');
+            if(emailControl) {
+              emailControl.setValue(this.user.email);
+            }
+
+            const educationControl = this.form.get('education');
+            if(educationControl) {
+              educationControl.setValue(this.user.education);
+            }
+
+            const skillSetControl = this.form.get('skill_set');
+            if(skillSetControl) {
+              skillSetControl.setValue(this.user.skill_set.join(','));
+            }
+
+            const yoeControl = this.form.get('yoe');
+            if(yoeControl) {
+              yoeControl.setValue(this.user.yoe);
+            }
+
+            const resumeControl = this.form.get('resume');
+            if(resumeControl) {
+              resumeControl.setValue(this.user.resume);
+            }
+
+            const statusControl = this.form.get('status');
+            if(statusControl) {
+              statusControl.patchValue(this.user.status);
+            }
           }
         )
     }
