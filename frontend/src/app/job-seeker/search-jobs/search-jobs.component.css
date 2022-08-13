@@ -40,13 +40,13 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 5rem;
 }
 
 #job-result {
   width: 30%;
   overflow-y: scroll;
-  max-height: 50rem;
+  max-height: 51rem;
+  margin-bottom: 8rem;
 }
 
 p.job-short-description {
