@@ -40,5 +40,10 @@ if (port == null || port == "") {
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
-    mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zzi3uw2.mongodb.net/myJobPortal`, {useNewUrlParser: true});
+    console.log(`${process.env.NODE_ENV}`);
+    if(process.env.NODE_ENV === 'prod') {
+        mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zzi3uw2.mongodb.net/myJobPortal`, { useNewUrlParser: true });
+    } else {
+        mongoose.connect('mongodb://localhost:27017/myJobPortal', { useNewUrlParser: true });
+    }
 });
