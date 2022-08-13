@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 const streamifier = require('streamifier');
+const Utils = require('../utils/utils');
 
 module.exports.getEmployerById = async function (req, res, next) {
     console.log("getEmployerById");
@@ -73,8 +74,8 @@ module.exports.signup = async function (req, res, next) {
                             const status = 'Active';
                             const seekerObj = {email, password, fullname, education, skill_set, yoe, resume, status};
                             const seeker = await Seeker.create(seekerObj);
-                            const obj = { user_id: seeker._id, fullname: seeker.fullname, email: seeker.email, role: "seeker" };
-                            const token = jwt.sign(obj, 'SECRET');
+                            const seekerTokenObj = { user_id: seeker._id, fullname: seeker.fullname, email: seeker.email, role: "seeker" };
+                            const token = Utils.generateJWTToken(seekerTokenObj);
                             return res.status(200).json({ token });
                         } else {
                             next(error);
@@ -87,8 +88,9 @@ module.exports.signup = async function (req, res, next) {
                 const skill_set = skills.split(',');
                 const seekerObj = {email, password, fullname, education, skill_set, yoe, resume};
                 const seeker = await Seeker.create(seekerObj);
-                const obj = { user_id: seeker._id, fullname: seeker.fullname, email: seeker.email, role: "seeker" };
-                const token = jwt.sign(obj, 'SECRET');
+                const seekerTokenObj = { user_id: seeker._id, fullname: seeker.fullname, email: seeker.email, role: "seeker" };
+                const token = Utils.generateJWTToken(seekerTokenObj, Utils.getSecretOrPrivateKey());
+
                 return res.status(200).json({ token });
             }
 
@@ -100,7 +102,9 @@ module.exports.signup = async function (req, res, next) {
                 country
             }
             const employer = await Employer.create({email, password, fullname, organization, location});
-            const token = jwt.sign({ user_id: employer._id, fullname: employer.fullname, email: employer.email, role: "employeer" }, 'SECRET');
+            const token = Utils.generateJWTToken({ user_id: employer._id, fullname: employer.fullname, email: employer.email, role: "employer" },
+                Utils.getSecretOrPrivateKey());
+
             return res.status(200).json({ token });
         }
     } catch (error) {

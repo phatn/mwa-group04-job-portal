@@ -21,7 +21,7 @@ export class AttachTokenInterceptor implements HttpInterceptor {
       return next.handle(request);
     } else {
       const headers = new HttpHeaders({
-        'Authorization': token
+        'Authorization': `Bearer ${token}`
       });
 
       const clone = request.clone({ headers });
