@@ -6,7 +6,7 @@ module.exports = class Utils {
         return 'MWA_SECRET';
     }
 
-    static generateJWTToken(payload, secretOrPrivateKey='MWA_SECRET', configs= { expiresIn: '1h' }, callback=null) {
+    static generateJWTToken(payload, secretOrPrivateKey='MWA_SECRET', configs= { expiresIn: '24h' }, callback=null) {
         return jwt.sign(payload, secretOrPrivateKey, configs, callback);
     }
 
