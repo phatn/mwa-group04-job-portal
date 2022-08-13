@@ -22,7 +22,7 @@
 
 .search-button button {
   margin-top: 0.2rem;
-  padding: 0.5rem 5rem 0.5rem 5rem;
+  padding: 0.5rem 6rem 0.5rem 6rem;
 }
 
 
@@ -96,4 +96,8 @@ p.job-short-description {
   position: sticky;
   top: 0;
   background-color: #FFF;
+}
+
+.mat-card {
+  padding-left: 0;
 }
