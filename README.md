@@ -1,8 +1,14 @@
 
 # MWA Job Portal Project
 
-## Application specifications and requirements
+**Professor**
+* [Asaad Saad](https://github.com/asaadsaad)
 
+**Contributors**
+* [Phat Nguyen](https://github.com/phatn)
+* [Phuc Hong](https://github.com/phucthaihgmiu)
+
+## Application specifications and requirements
 
 It’s up to you to decide your project specs and requirements.
 One member of each team should be voted to be a Team leader.
