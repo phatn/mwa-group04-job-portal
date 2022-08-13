@@ -36,8 +36,6 @@ module.exports.getEJobs = async function (req, res, next) {
         const results = await Job.find(
             { "employer._id": req.user.user_id }
         );
-
-        console.log(results);
         res.json(results);
     } catch (error) {
         next(error);
