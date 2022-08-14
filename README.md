@@ -43,10 +43,16 @@ To qualify for 5 extra points to be added to your final grade, your project must
 Access the job portal at [Job Portal Website](https://mwa-job-portal-web.herokuapp.com/)
 
 ## Screenshots
-![Login Page](https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442581/mwa-job-portal/Login_zevvfh.png "Login Page")
-![Jobs Search](https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442589/mwa-job-portal/Jobs_Search_iygzn1.png "Job Search")
-![My Jobs](https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442587/mwa-job-portal/My_Jobs_xh3oiu.png "My Jobs")
-![My Profile](https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442584/mwa-job-portal/My_Profile_hsybyl.png "My Profile")
+<table>
+    <tr>
+        <td><img src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442581/mwa-job-portal/Login_zevvfh.png" alt="Login Page" width=100%></td>
+        <td><img src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442589/mwa-job-portal/Jobs_Search_iygzn1.png" alt="Jobs Search" width=100%></td>
+    </tr>
+    <tr>
+        <td><img src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442587/mwa-job-portal/My_Jobs_xh3oiu.png" alt="My Jobs" width=100%></td>
+        <td><img src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442584/mwa-job-portal/My_Profile_hsybyl.png" alt="My Profile" width=100%></td>
+    </tr>
+</table>
 
 
 
