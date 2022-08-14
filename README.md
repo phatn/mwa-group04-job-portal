@@ -39,7 +39,14 @@ To qualify for 5 extra points to be added to your final grade, your project must
 * Using [AWS S3](https://aws.amazon.com/s3/) or any other similar service for image upload (backend and frontend).
 * Your project is hosted online and accessible with a public URL.
 
-## Application URLs
+## Application
 Access the job portal at [Job Portal Website](https://mwa-job-portal-web.herokuapp.com/)
+
+## Screenshots
+![Login Page](https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442581/mwa-job-portal/Login_zevvfh.png "Login Page")
+![Jobs Search](https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442589/mwa-job-portal/Jobs_Search_iygzn1.png "Job Search")
+![My Jobs](https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442587/mwa-job-portal/My_Jobs_xh3oiu.png "My Jobs")
+![My Profile](https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442584/mwa-job-portal/My_Profile_hsybyl.png "My Profile")
+
 
 
