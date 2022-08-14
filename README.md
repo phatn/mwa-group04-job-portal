@@ -45,12 +45,12 @@ Access the job portal at [Job Portal Website](https://mwa-job-portal-web.herokua
 ## Screenshots
 <table>
     <tr>
-        <td><img src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442581/mwa-job-portal/Login_zevvfh.png" alt="Login Page" width=100%></td>
-        <td><img src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442589/mwa-job-portal/Jobs_Search_iygzn1.png" alt="Jobs Search" width=100%></td>
+        <td><img title="Login Page" src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442581/mwa-job-portal/Login_zevvfh.png" alt="Login Page" width=100%></td>
+        <td><img title="Jobs Search" src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442589/mwa-job-portal/Jobs_Search_iygzn1.png" alt="Jobs Search" width=100%></td>
     </tr>
     <tr>
-        <td><img src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442587/mwa-job-portal/My_Jobs_xh3oiu.png" alt="My Jobs" width=100%></td>
-        <td><img src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442584/mwa-job-portal/My_Profile_hsybyl.png" alt="My Profile" width=100%></td>
+        <td><img title="My Jobs" src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442587/mwa-job-portal/My_Jobs_xh3oiu.png" alt="My Jobs" width=100%></td>
+        <td><img title="My Profile" src="https://res.cloudinary.com/dtdvo7oye/image/upload/v1660442584/mwa-job-portal/My_Profile_hsybyl.png" alt="My Profile" width=100%></td>
     </tr>
 </table>
 
